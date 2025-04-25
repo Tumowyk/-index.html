@@ -250,6 +250,8 @@ footer {
     <a href="#interesting-facts">Цікаві факти</a>
     <a href="#beginner-tips">Поради для початківців</a>
     <a href="#safety-tips">Рекомендації про безпеку</a>
+    <a href="#tools">Базові інструменти</a>
+    <a href="#true-or-myth">Правда чи міф</a>
   </nav>
 
   <div class="container" id="theory">
@@ -453,6 +455,54 @@ footer {
     <li><strong>10. Завжди вимикайте електричні пристрої перед ремонтом:</strong> Перед тим, як виконувати будь-які роботи з електронним пристроєм, завжди вимикайте його і від'єднуйте від джерела живлення, щоб уникнути ураження струмом.</li>
   </ul>
 </div>
+
+<div class="container" id="tools">
+  <h2>Базові інструменти для початківця</h2>
+  <ul>
+    <li><strong>Паяльник:</strong> необхідний для з'єднання компонентів на платі.</li>
+    <li><strong>Мультиметр:</strong> вимірює напругу, струм та опір — маст-хев для перевірки схем.</li>
+    <li><strong>Пінцет:</strong> зручно працювати з дрібними деталями.</li>
+    <li><strong>Провідники та макетна плата (breadboard):</strong> для тестування схем без пайки.</li>
+    <li><strong>Паяльна станція або тримач:</strong> для зручного та безпечного паяння.</li>
+    <li><strong>Тестер батарей:</strong> допоможе перевірити залишок заряду у джерелах живлення.</li>
+    <li><strong>Термоусадка або ізоляційна стрічка:</strong> для безпечної ізоляції дротів.</li>
+    <li><strong>Набір резисторів, конденсаторів, світлодіодів:</strong> базові компоненти для тренувань.</li>
+    <li><strong>Невеликий набір інструментів:</strong> бокорізи, кусачки, викрутки — для збирання і розбирання схем.</li>
+  </ul>
+</div>
+<div class="container" id="true-or-myth">
+  <h2>Правда чи міф</h2>
+  <ul>
+    <li>
+      <strong>Електроніка небезпечна лише при високій напрузі.</strong>
+      <button onclick="toggleAnswer(this)">Показати відповідь</button>
+      <p class="answer" style="display: none;">Міф. Навіть низька напруга може бути небезпечною в певних умовах.</p>
+    </li>
+    <li>
+      <strong>Світлодіод може згоріти, якщо підключити його без резистора.</strong>
+      <button onclick="toggleAnswer(this)">Показати відповідь</button>
+      <p class="answer" style="display: none;">Правда. Надто сильний струм може пошкодити світлодіод.</p>
+    </li>
+    <li>
+      <strong>Транзистор — це вимикач з трьома ніжками.</strong>
+      <button onclick="toggleAnswer(this)">Показати відповідь</button>
+      <p class="answer" style="display: none;">Правда. Транзистор можна використовувати як електронний перемикач.</p>
+    </li>
+  </ul>
+</div>
+
+<script>
+  function toggleAnswer(button) {
+    const answer = button.nextElementSibling;
+    if (answer.style.display === "none") {
+      answer.style.display = "block";
+      button.textContent = "Сховати відповідь";
+    } else {
+      answer.style.display = "none";
+      button.textContent = "Показати відповідь";
+    }
+  }
+</script>
   <div class="external-links">
     <h2>Корисні посилання:</h2>
     <p><a href="https://tumowyk.github.io/I.T-/" target="_blank">Мій сайт "I.T"</a></p>
