@@ -1,12 +1,112 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>Додаткова сторінка</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Проєкти — Світ Електроніки</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fa;
+      color: #333;
+      padding: 40px 20px;
+    }
+
+    header {
+      background-color: #002f6c;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    .project {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .project h2 {
+      color: #0078d4;
+      font-size: 1.8em;
+    }
+
+    .project p {
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #0078d4;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #002f6c;
+      color: white;
+      padding: 20px 0;
+      margin-top: 50px;
+    }
+
+    /* Адаптивність */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .project h2 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Вітаємо на другій сторінці!</h1>
-  <p>Тут може бути додаткова інформація, посилання, приклади схем, або щось інше.</p>
-  <a href="index.html">Повернутись на головну</a>
+
+  <!-- Шапка -->
+  <header>
+    <h1>Проєкти Світ Електроніки</h1>
+  </header>
+
+  <!-- Проект 1 -->
+  <section class="project">
+    <h2>Мигалка на Arduino</h2>
+    <p>Простий проєкт для новачків: світлодіод блимає з інтервалом. Потрібно лише Arduino, резистор і світлодіод.</p>
+  </section>
+
+  <!-- Проект 2 -->
+  <section class="project">
+    <h2>Детектор світла</h2>
+    <p>Використовує фоторезистор для вмикання світлодіода при зниженні освітлення. Підходить для нічного освітлення.</p>
+  </section>
+
+  <!-- Проект 3 -->
+  <section class="project">
+    <h2>Температурний датчик</h2>
+    <p>Цей проєкт використовує температурний датчик для вимірювання температури в приміщенні. Показує результат на екрані дисплея.</p>
+  </section>
+
+  <!-- Кнопка повернення на головну -->
+  <a class="back-btn" href="index.html">← Повернутись на головну</a>
+
+  <!-- Футер -->
+  <footer>
+    &copy; 2025 Світ Електроніки. Всі права захищено.
+  </footer>
+
 </body>
 </html>
