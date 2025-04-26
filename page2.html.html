@@ -3,105 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Проекти з електроніки на сайті Світ Електроніки. Покрокові інструкції для початківців.">
-  <meta name="keywords" content="електроніка, проекти, Arduino, навчання, схеми, DIY">
-  <meta name="author" content="Світ Електроніки">
-  <title>Проекти - Світ Електроніки</title>
-  <link rel="stylesheet" href="style.css"> <!-- Підключаємо CSS -->
+  <title>Проєкти — Світ Електроніки</title>
   <style>
-    /* Загальні стилі для другої сторінки */
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: #f5f7fa;
       color: #333;
+      padding: 40px 20px;
+    }
+
+    header {
+      background-color: #002f6c;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    .project {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .project h2 {
+      color: #0078d4;
+      font-size: 1.8em;
+    }
+
+    .project p {
+      font-size: 1.1em;
       line-height: 1.6;
     }
-    header, section {
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 30px;
+      text-decoration: none;
+      color: #0078d4;
+      font-weight: bold;
+      font-size: 1.2em;
     }
-    h2 {
-      color: #2c3e50;
+
+    .back-btn:hover {
+      text-decoration: underline;
     }
-    .faq-item {
-      margin-bottom: 15px;
+
+    footer {
+      text-align: center;
+      background-color: #002f6c;
+      color: white;
+      padding: 20px 0;
+      margin-top: 50px;
     }
-    .faq-item h3 {
-      margin: 0;
-      color: #34495e;
+
+    /* Адаптивність */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .project h2 {
+        font-size: 1.5em;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Навігація -->
+  <!-- Шапка -->
   <header>
-    <nav>
-      <a href="index.html">Головна</a> | <a href="projects.html">Проекти</a> | <a href="contact.html">Контакти</a>
-    </nav>
+    <h1>Проєкти Світ Електроніки</h1>
   </header>
 
-  <!-- Про нас -->
-  <section id="about">
-    <h2>Про Світ Електроніки</h2>
-    <p>Світ Електроніки — це онлайн-ресурс для всіх, хто хоче вивчати електроніку. Ми пропонуємо покрокові інструкції для створення проектів з Arduino, Raspberry Pi та інших компонентів, а також рекомендації по вибору інструментів і матеріалів.</p>
-    <p>Наша мета — допомогти кожному стати частиною спільноти електроніків, незалежно від рівня досвіду.</p>
+  <!-- Проект 1 -->
+  <section class="project">
+    <h2>Мигалка на Arduino</h2>
+    <p>Простий проєкт для новачків: світлодіод блимає з інтервалом. Потрібно лише Arduino, резистор і світлодіод.</p>
   </section>
 
-  <!-- Інструкції та поради -->
-  <section id="guides">
-    <h2>Як почати з електронікою?</h2>
-    <p>Для початку рекомендовано освоїти основи, такі як підключення резисторів, світлодіодів та використання простих сенсорів. Ось кілька корисних порад:</p>
-    <ul>
-      <li>Використовуйте макетні плати для тестування схем без пайки.</li>
-      <li>Завжди перевіряйте всі з'єднання перед включенням пристрою.</li>
-      <li>Почніть з простих проектів, таких як мигалка на Arduino або датчик температури.</li>
-    </ul>
+  <!-- Проект 2 -->
+  <section class="project">
+    <h2>Детектор світла</h2>
+    <p>Використовує фоторезистор для вмикання світлодіода при зниженні освітлення. Підходить для нічного освітлення.</p>
   </section>
 
-  <!-- Покрокові інструкції -->
-  <section id="instructions">
-    <h2>Проект: Мигалка на Arduino</h2>
-    <h3>Крок 1: Підготовка компонентів</h3>
-    <p>Потрібно: Arduino, світлодіод, резистор (220 Ом), макетна плата.</p>
-
-    <h3>Крок 2: Підключення</h3>
-    <p>Підключіть світлодіод до піну 13 на Arduino та інший контакт до землі через резистор.</p>
-
-    <h3>Крок 3: Програмування</h3>
-    <p>Напишіть програму в Arduino IDE:</p>
-    <pre>
-void setup() {
-  pinMode(13, OUTPUT);
-}
-
-void loop() {
-  digitalWrite(13, HIGH);  // Включаємо світлодіод
-  delay(1000);              // Затримка 1 секунда
-  digitalWrite(13, LOW);   // Вимикаємо світлодіод
-  delay(1000);              // Затримка 1 секунда
-}
-    </pre>
+  <!-- Проект 3 -->
+  <section class="project">
+    <h2>Температурний датчик</h2>
+    <p>Цей проєкт використовує температурний датчик для вимірювання температури в приміщенні. Показує результат на екрані дисплея.</p>
   </section>
 
-  <!-- FAQ (Питання та відповіді) -->
-  <section id="faq">
-    <h2>Часто задавані питання</h2>
-    <div class="faq-item">
-      <h3>Як вибрати Arduino для початку?</h3>
-      <p>Для початку можна використовувати Arduino Uno. Це базова плата, яка підходить для більшості початкових проектів.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Чи потрібно мати досвід програмування для роботи з Arduino?</h3>
-      <p>Ні, Arduino розроблено так, щоб навіть новачки могли швидко освоїти програмування завдяки простому інтерфейсу та великій кількості онлайн-ресурсів.</p>
-    </div>
-  </section>
+  <!-- Кнопка повернення на головну -->
+  <a class="back-btn" href="index.html">← Повернутись на головну</a>
 
-  <!-- Кнопка для повернення на головну -->
+  <!-- Футер -->
   <footer>
-    <p>© 2025 Світ Електроніки | <a href="index.html">Повернутися на головну</a></p>
+    &copy; 2025 Світ Електроніки. Всі права захищено.
   </footer>
 
 </body>
