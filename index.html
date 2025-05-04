@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>I.T Електроніка | Перевірка ремонту</title>
+  <title>I.T Електроніка | База даних ремонту</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -71,17 +72,17 @@
     const resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = "";
 
-    const found = repairs.filter(r => r.phone.includes(input));
+    const found = repairs.filter(r => r.phone === input);
     if (found.length > 0) {
       found.forEach(r => {
-        resultsDiv.innerHTML += 
+        resultsDiv.innerHTML += `
           <div class="card">
             <p><strong>Телефон:</strong> ${r.phone}</p>
             <p><strong>Пристрій:</strong> ${r.device}</p>
             <p><strong>Дата:</strong> ${r.date}</p>
             <p><strong>Сума:</strong> ${r.price}</p>
           </div>
-        ;
+        `;
       });
     } else {
       resultsDiv.innerHTML = "<p style='text-align:center;'>Нічого не знайдено.</p>";
