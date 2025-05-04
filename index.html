@@ -27,6 +27,9 @@
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.1);
       max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
     }
   </style>
 </head>
@@ -39,7 +42,7 @@
   <button onclick="searchRepairs()">Пошук</button>
 </div>
 
-<div id="results" style="margin-top: 30px; text-align: center;"></div>
+<div id="results" style="margin-top: 30px;"></div>
 
 <script>
   const repairs = [
@@ -54,6 +57,12 @@
       device: "Телевізор",
       date: "01.05.2025",
       price: "500 грн"
+    },
+    {
+      phone: "+380966446988",
+      device: "DVD-програвач",
+      date: "06.05.2025",
+      price: "300 грн"
     }
   ];
 
@@ -71,10 +80,11 @@
             <p><strong>Пристрій:</strong> ${r.device}</p>
             <p><strong>Дата:</strong> ${r.date}</p>
             <p><strong>Сума:</strong> ${r.price}</p>
-          </div>;
+          </div>
+        ;
       });
     } else {
-      resultsDiv.innerHTML = "<p>Нічого не знайдено.</p>";
+      resultsDiv.innerHTML = "<p style='text-align:center;'>Нічого не знайдено.</p>";
     }
   }
 </script>
