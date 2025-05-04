@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -15,11 +14,11 @@
       text-align: center;
       color: #333;
     }
-    .input-group {
+    .input-group, .admin-section {
       text-align: center;
       margin-top: 20px;
     }
-    input[type="text"], input[type="password"] {
+    input[type="text"], input[type="password"], input[type="date"] {
       padding: 10px;
       width: 250px;
       font-size: 16px;
@@ -48,6 +47,8 @@
       max-width: 500px;
       text-align: left;
     }
+    .hidden { display: none; }
+    #summary { margin-top: 30px; text-align: center; }
   </style>
 </head>
 <body>
@@ -61,41 +62,40 @@
 
 <div id="results"></div>
 
-<!-- Адмін панель -->
-<div class="input-group" style="margin-top:40px;">
-  <h3>Адмін панель</h3>
-  <div id="loginSection">
+<div class="admin-section">
+  <h3>Адмін-панель</h3>
+  <div id="adminLogin">
     <input type="password" id="adminPass" placeholder="Пароль">
-    <button onclick="adminLogin()">Увійти</button>
+    <button onclick="login()">Увійти</button>
   </div>
-
-  <div id="adminForm" style="display:none; margin-top:20px;">
-    <input type="text" id="newPhone" placeholder="Номер телефону" value="+380"><br>
-    <input type="text" id="newDevice" placeholder="Пристрій"><br>
-    <input type="text" id="newDate" placeholder="Дата (дд.мм.рррр)"><br>
-    <input type="text" id="newPrice" placeholder="Сума (грн)"><br>
-    <button onclick="addRepair()">Додати ремонт</button>
+  <div id="adminPanel" class="hidden">
+    <input type="text" id="newPhone" placeholder="Номер телефону" value="+380">
+    <input type="text" id="newDevice" placeholder="Пристрій">
+    <input type="date" id="newDate">
+    <input type="text" id="newPrice" placeholder="Сума (грн)">
+    <br><button onclick="addRepair()">Додати ремонт</button>
+    <div id="summary"></div>
   </div>
 </div>
 
 <script>
   const repairs = [
-    { phone: "+380989343224", device: "Пілосос", date: "18.04.2025", price: "800 грн" },
-    { phone: "+380989343224", device: "Планшет", date: "18.04.2025", price: "200 грн" },
-    { phone: "+380989343224", device: "Акумулятор шуроповерта", date: "27.03.2025", price: "800 грн" },
-    { phone: "+380989264172", device: "Акумулятор шуроповерта", date: "27.03.2025", price: "800 грн" },
-    { phone: "+380680115214", device: "Радіо", date: "13.04.2025", price: "50 грн" },
-    { phone: "+380989264172", device: "Трактор червний", date: "28.03.2025", price: "400 грн" },
-    { phone: "+380989264172", device: "Лазерий уровень", date: "1.04.2025", price: "150 грн" },
-    { phone: "+380989264172", device: "Фара в тракторі червоному", date: "04.04.2025", price: "50 грн" },
-    { phone: "+380989264172", device: "Світло в ванній", date: "04.04.2025", price: "100 грн" },
-    { phone: "+380989264172", device: "Реле насосна станція", date: "04.04.2025", price: "50 грн" },
-    { phone: "+380989264172", device: "Ваги", date: "17.03.2025", price: "400 грн" },
-    { phone: "+380966446988", device: "Павербанк(с.Майстер)", date: "19.03.2025", price: "200 грн" },
-    { phone: "+380966446988", device: "Ліхтарик налобний (с.Майстер)", date: "17.03.2025", price: "200 грн" },
-    { phone: "+380989264172", device: "Ліхтарик налобний", date: "1.05.2025", price: "100 грн" },
-    { phone: "+380688683536", device: "Т2", date: "2.05.2025", price: "750 грн" },
-    { phone: "+380989264172", device: "Прожектор,габарити в тракторі", date: "2.05.2025", price: "150 грн" }
+    { phone: "+380989343224", device: "Пілосос", date: "2025-04-18", price: "800 грн" },
+    { phone: "+380989343224", device: "Планшет", date: "2025-04-18", price: "200 грн" },
+    { phone: "+380989343224", device: "Акумулятор шуроповерта", date: "2025-03-27", price: "800 грн" },
+    { phone: "+380989264172", device: "Акумулятор шуроповерта", date: "2025-03-27", price: "800 грн" },
+    { phone: "+380680115214", device: "Радіо", date: "2025-04-13", price: "50 грн" },
+    { phone: "+380989264172", device: "Трактор червний", date: "2025-03-28", price: "400 грн" },
+    { phone: "+380989264172", device: "Лазерий уровень", date: "2025-04-01", price: "150 грн" },
+    { phone: "+380989264172", device: "Фара в тракторі червоному", date: "2025-04-04", price: "50 грн" },
+    { phone: "+380989264172", device: "Світло в ванній", date: "2025-04-04", price: "100 грн" },
+    { phone: "+380989264172", device: "Реле насосна станція", date: "2025-04-04", price: "50 грн" },
+    { phone: "+380989264172", device: "Ваги", date: "2025-03-17", price: "400 грн" },
+    { phone: "+380966446988", device: "Павербанк(с.Майстер)", date: "2025-03-19", price: "200 грн" },
+    { phone: "+380966446988", device: "Ліхтарик налобний (с.Майстер)", date: "2025-03-17", price: "200 грн" },
+    { phone: "+380989264172", device: "Ліхтарик налобний", date: "2025-05-01", price: "100 грн" },
+    { phone: "+380688683536", device: "Т2", date: "2025-05-02", price: "750 грн" },
+    { phone: "+380989264172", device: "Прожектор,габарити в тракторі", date: "2025-05-02", price: "150 грн" }
   ];
 
   function searchRepairs() {
@@ -103,13 +103,7 @@
     const resultsDiv = document.getElementById("results");
     resultsDiv.innerHTML = "";
 
-    const found = repairs
-      .filter(r => r.phone === input)
-      .sort((a, b) => {
-        const dA = new Date(a.date.split(".").reverse().join("-"));
-        const dB = new Date(b.date.split(".").reverse().join("-"));
-        return dB - dA;
-      });
+    const found = repairs.filter(r => r.phone === input).sort((a, b) => new Date(b.date) - new Date(a.date));
 
     if (found.length > 0) {
       found.forEach(r => {
@@ -126,28 +120,52 @@
     }
   }
 
-  function adminLogin() {
+  function login() {
     const pass = document.getElementById("adminPass").value;
     if (pass === "Tumowyk138Ivan") {
-      document.getElementById("adminForm").style.display = "block";
-      document.getElementById("loginSection").style.display = "none";
+      document.getElementById("adminLogin").classList.add("hidden");
+      document.getElementById("adminPanel").classList.remove("hidden");
+      showSummary();
     } else {
-      alert("Невірний пароль");
+      alert("Невірний пароль!");
     }
   }
 
   function addRepair() {
     const phone = document.getElementById("newPhone").value.trim();
     const device = document.getElementById("newDevice").value.trim();
-    const date = document.getElementById("newDate").value.trim();
+    const date = document.getElementById("newDate").value;
     const price = document.getElementById("newPrice").value.trim();
-
     if (phone && device && date && price) {
       repairs.push({ phone, device, date, price: price + " грн" });
-      alert("Ремонт додано!");
+      alert("Додано!");
+      showSummary();
     } else {
-      alert("Будь ласка, заповніть усі поля.");
+      alert("Заповніть всі поля!");
     }
+  }
+
+  function showSummary() {
+    const summaryDiv = document.getElementById("summary");
+    const phoneSet = new Set();
+    let total = 0;
+    const perPerson = {};
+
+    repairs.forEach(r => {
+      phoneSet.add(r.phone);
+      const num = parseFloat(r.price);
+      total += num;
+      if (!perPerson[r.phone]) perPerson[r.phone] = 0;
+      perPerson[r.phone] += num;
+    });
+
+    summaryDiv.innerHTML = `
+      <h4>Звіт:</h4>
+      <p><strong>Загальний прибуток:</strong> ${total} грн</p>
+      <p><strong>Кількість унікальних клієнтів:</strong> ${phoneSet.size}</p>
+      <h5>Дохід по номерах:</h5>
+      <ul>${Object.entries(perPerson).map(([k, v]) => `<li>${k}: ${v} грн</li>`).join("")}</ul>
+    `;
   }
 </script>
 
