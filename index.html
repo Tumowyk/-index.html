@@ -49,7 +49,6 @@
     }
     .hidden { display: none; }
     #summary { margin-top: 30px; text-align: center; }
-    #debtSummary { margin-top: 20px; font-size: 18px; font-weight: bold; text-align: center; color: red; }
   </style>
 </head>
 <body>
@@ -60,8 +59,6 @@
   <input type="text" id="phoneInput" value="+380" placeholder="Введіть номер телефону">
   <button onclick="searchRepairs()">Пошук</button>
 </div>
-
-<div id="debtSummary"></div> <!-- Виведення загального боргу для клієнта -->
 
 <div id="results"></div>
 
@@ -100,45 +97,29 @@
     { phone: "+380688683536", device: "Т2", date: "2025.05.02", price: "750 грн" },
     { phone: "+380989264172", device: "габарити в тракторі", date: "2025.05.02", price: "100 грн" },
     { phone: "+380989264172", device: "Вивів провода до компресора (5м) поставив три прожектора на датчик руху вивів включатель", date: "2025.05.07", price: "100 грн" },
-    { phone: "+380989264172", device: "поворот в червоному тракторі лівий", date: "2025.05.09", price: "0 грн" }
+    { phone: "+380989264172", device: "поворот в червоному тракторі лівий", date: "2025.05.09", price: "100 грн" },
+    { phone: "+380989264172", device: "Габарит,Повороти в тракторі Білорус", date: "2025.05.11", price: "100 грн" }
   ];
-function searchRepairs() {
+
+  function searchRepairs() {
     const input = document.getElementById("phoneInput").value.trim();
     const resultsDiv = document.getElementById("results");
-    const debtSummary = document.getElementById("debtSummary");
     resultsDiv.innerHTML = "";
-    debtSummary.innerHTML = ""; // Очищаємо попередній борг
 
-    // Фільтруємо записи по номеру телефону
     const found = repairs.filter(r => r.phone === input).sort((a, b) => new Date(b.date) - new Date(a.date));
 
     if (found.length > 0) {
-      let totalDebt = 0;
-      
-      // Підсумовуємо борги для цього номера
       found.forEach(r => {
-        const price = parseFloat(r.price);
-        totalDebt += price;
-      });
-
-      // Виводимо загальний борг
-      debtSummary.innerHTML = 
-        <h4>Загальний борг для номера ${input}: </h4>
-        <p style="font-size: 20px; color: red; font-weight: bold;">${totalDebt} грн</p>
-      ;
-
-      // Виведення інформації по ремонтах
-      found.forEach(r => {
-        resultsDiv.innerHTML += 
+        resultsDiv.innerHTML += `
           <div class="card">
             <p><strong>Телефон:</strong> ${r.phone}</p>
             <p><strong>Пристрій:</strong> ${r.device}</p>
             <p><strong>Дата:</strong> ${r.date}</p>
             <p><strong>Сума:</strong> ${r.price}</p>
-          </div>;
+          </div>`;
       });
     } else {
-      resultsDiv.innerHTML = "<p style='text-align:center;'>Нічого не знайдено для цього номера.</p>";
+      resultsDiv.innerHTML = "<p style='text-align:center;'>Нічого не знайдено.</p>";
     }
   }
 
@@ -171,3 +152,25 @@ function searchRepairs() {
     const summaryDiv = document.getElementById("summary");
     const phoneSet = new Set();
     let total = 0;
+    const perPerson = {};
+
+    repairs.forEach(r => {
+      phoneSet.add(r.phone);
+      const num = parseFloat(r.price);
+      total += num;
+      if (!perPerson[r.phone]) perPerson[r.phone] = 0;
+      perPerson[r.phone] += num;
+    });
+
+    summaryDiv.innerHTML = `
+      <h4>Звіт:</h4>
+      <p><strong>Загальний прибуток:</strong> ${total} грн</p>
+      <p><strong>Кількість унікальних клієнтів:</strong> ${phoneSet.size}</p>
+      <h5>Дохід по номерах:</h5>
+      <ul>${Object.entries(perPerson).map(([k, v]) => `<li>${k}: ${v} грн</li>`).join("")}</ul>
+    `;
+  }
+</script>
+
+</body>
+</html>
