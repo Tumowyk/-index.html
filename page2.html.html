@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>I.T Електроніка | Перевірка боргу</title>
+  <title>I.T Електроніка | Перевірка боргу та ремонтів</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -29,58 +29,170 @@
     button {
       padding: 10px 15px;
       font-size: 16px;
-      background: #e74c3c;
+      background: #3498db;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
     button:hover {
-      background: #c0392b;
+      background: #2980b9;
     }
-    .result {
-      margin-top: 20px;
+    .card {
+      background: #fefefe;
+      padding: 15px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+      text-align: left;
+      border: 2px solid #6fa8dc;
+    }
+    .debt-alert {
+      border: 2px solid red;
+      color: red;
+      font-weight: bold;
+      padding: 10px;
+      margin: 10px auto;
+      max-width: 500px;
+      background-color: #ffe5e5;
+      border-radius: 10px;
+    }
+    .no-debt {
+      font-weight: bold;
+      color: green;
+      margin: 10px auto;
+      max-width: 500px;
+    }
+    .card p {
+      font-weight: bold;
+    }
+    #results {
+      margin-top: 30px;
       text-align: center;
-      font-size: 18px;
-      color: #2c3e50;
     }
   </style>
 </head>
 <body>
 
-<h2>Перевірка боргу | I.T Електроніка</h2>
+<h2>I.T Електроніка | Перевірка боргу та ремонтів</h2>
 
 <div class="input-group">
   <input type="text" id="phoneInput" value="+380" placeholder="Введіть номер телефону">
-  <button onclick="checkDebt()">Перевірити</button>
+  <button onclick="checkDebtAndRepairs()">Перевірити</button>
 </div>
 
-<div class="result" id="result"></div>
+<div id="results"></div>
+<div id="adminLogin" class="input-group">
+  <input type="password" id="adminPass" placeholder="Пароль адміністратора">
+  <button onclick="login()">Увійти</button>
+</div>
+
+<div id="adminPanel" class="hidden">
+  <h3 style="text-align:center;">Адмін Панель</h3>
+  <div class="input-group">
+    <input type="text" id="newPhone" placeholder="Номер телефону">
+    <input type="text" id="newDevice" placeholder="Пристрій">
+    <input type="date" id="newDate">
+    <input type="text" id="newPrice" placeholder="Ціна">
+    <button onclick="addRepair()">Додати ремонт</button>
+  </div>
+  <div id="summary" class="card"></div>
+</div>
+
 
 <script>
   const debts = {
-    "+380989343224": { amount: 300, repair: "Заміна екрану", date: "2025-04-10" },
-    "+380989264172": { amount: 0, repair: "Діагностика", date: "2025-03-15" },
-    "+380680115214": { amount: 150, repair: "Ремонт камери", date: "2025-02-20" },
-    "+380966446988": { amount: 0, repair: "Заміна батареї", date: "2025-01-25" },
-    "+380688683536": { amount: 500, repair: "Комплексний ремонт", date: "2025-05-01" }
+    "+380989343224": 300,
+    "+380989264172": 0,
+    "+380680115214": 150,
+    "+380966446988": 100,
+    "+380688683536": 500
   };
 
-  function checkDebt() {
+  const repairs = [
+    { phone: "+380989343224", device: "Пілосос", date: "2025.04.18", price: "800 грн" },
+    { phone: "+380680115214", device: "Радіо", date: "2025.04.13", price: "50 грн" },
+    { phone: "+380966446988", device: "Радіо", date: "2025.04.13", price: "500 грн" }
+  ];
+
+  function checkDebtAndRepairs() {
     const phone = document.getElementById("phoneInput").value.trim();
-    const resultDiv = document.getElementById("result");
+    const resultDiv = document.getElementById("results");
+    resultDiv.innerHTML = "";
 
     if (phone in debts) {
-      const { amount, repair, date } = debts[phone];
+      const amount = debts[phone];
       if (amount > 0) {
-        resultDiv.innerHTML = `<strong style="color:red;">Борг: ${amount} грн<br>Ремонт: ${repair}<br>Дата: ${date}</strong>`;
+        resultDiv.innerHTML += `<div class="debt-alert">Борг: ${amount} грн</div>`;
       } else {
-        resultDiv.innerHTML = `<strong style="color:green;">Боргу немає<br>Ремонт: ${repair}<br>Дата: ${date}</strong>`;
+        resultDiv.innerHTML += `<div class="no-debt">Боргу немає</div>`;
       }
     } else {
-      resultDiv.innerHTML = "Номер не знайдено в базі.";
+      resultDiv.innerHTML += `<div class="no-debt">Номер не знайдено в базі боргів.</div>`;
+    }
+
+    const found = repairs.filter(r => r.phone === phone);
+    if (found.length > 0) {
+      found.forEach(r => {
+        resultDiv.innerHTML += `
+          <div class="card">
+            <p>Пристрій: ${r.device}</p>
+            <p>Дата: ${r.date}</p>
+            <p>Сума: ${r.price}</p>
+          </div>`;
+      });
+    } else {
+      resultDiv.innerHTML += `<div class="no-debt">Ремонтних записів не знайдено.</div>`;
     }
   }
+
+  function login() {
+    const pass = document.getElementById("adminPass").value;
+    if (pass === "Ivan") {
+      document.getElementById("adminLogin").classList.add("hidden");
+      document.getElementById("adminPanel").classList.remove("hidden");
+      showSummary();
+    } else {
+      alert("Невірний пароль!");
+    }
+  }
+
+  function addRepair() {
+    const phone = document.getElementById("newPhone").value.trim();
+    const device = document.getElementById("newDevice").value.trim();
+    const date = document.getElementById("newDate").value;
+    const price = document.getElementById("newPrice").value.trim();
+    if (phone && device && date && price) {
+      repairs.push({ phone, device, date, price: price + " грн" });
+      alert("Додано!");
+      showSummary();
+    } else {
+      alert("Заповніть всі поля!");
+    }
+  }
+
+  function showSummary() {
+    const summaryDiv = document.getElementById("summary");
+    const phoneSet = new Set();
+    let total = 0;
+    const perPerson = {};
+    repairs.forEach(r => {
+      phoneSet.add(r.phone);
+      const num = parseFloat(r.price);
+      total += num;
+      if (!perPerson[r.phone]) perPerson[r.phone] = 0;
+      perPerson[r.phone] += num;
+    });
+    summaryDiv.innerHTML = `
+      <h4>Звіт:</h4>
+      <p><strong>Загальний прибуток:</strong> ${total} грн</p>
+      <p><strong>Кількість унікальних клієнтів:</strong> ${phoneSet.size}</p>
+      <h5>Дохід по номерах:</h5>
+      <ul>${Object.entries(perPerson).map(([k, v]) => `<li>${k}: ${v} грн</li>`).join("")}</ul>
+    `;
+  }
+
 </script>
 
 </body>
