@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -18,7 +19,7 @@
       text-align: center;
       margin-top: 20px;
     }
-    input[type="text"] {
+    input[type="text"], input[type="password"] {
       padding: 10px;
       width: 250px;
       font-size: 16px;
@@ -71,6 +72,9 @@
       margin-top: 30px;
       text-align: center;
     }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -90,16 +94,8 @@
 
 <div id="adminPanel" class="hidden">
   <h3 style="text-align:center;">Адмін Панель</h3>
-  <div class="input-group">
-    <input type="text" id="newPhone" placeholder="Номер телефону">
-    <input type="text" id="newDevice" placeholder="Пристрій">
-    <input type="date" id="newDate">
-    <input type="text" id="newPrice" placeholder="Ціна">
-    <button onclick="addRepair()">Додати ремонт</button>
-  </div>
   <div id="summary" class="card"></div>
 </div>
-
 
 <script>
   const debts = {
@@ -158,20 +154,6 @@
     }
   }
 
-  function addRepair() {
-    const phone = document.getElementById("newPhone").value.trim();
-    const device = document.getElementById("newDevice").value.trim();
-    const date = document.getElementById("newDate").value;
-    const price = document.getElementById("newPrice").value.trim();
-    if (phone && device && date && price) {
-      repairs.push({ phone, device, date, price: price + " грн" });
-      alert("Додано!");
-      showSummary();
-    } else {
-      alert("Заповніть всі поля!");
-    }
-  }
-
   function showSummary() {
     const summaryDiv = document.getElementById("summary");
     const phoneSet = new Set();
@@ -184,15 +166,22 @@
       if (!perPerson[r.phone]) perPerson[r.phone] = 0;
       perPerson[r.phone] += num;
     });
+
+    let listItems = "";
+    for (let phone in perPerson) {
+      const income = perPerson[phone];
+      const debt = debts[phone] || 0;
+      listItems += `<li>${phone}: ${income} грн | Борг: ${debt} грн</li>`;
+    }
+
     summaryDiv.innerHTML = `
       <h4>Звіт:</h4>
       <p><strong>Загальний прибуток:</strong> ${total} грн</p>
       <p><strong>Кількість унікальних клієнтів:</strong> ${phoneSet.size}</p>
-      <h5>Дохід по номерах:</h5>
-      <ul>${Object.entries(perPerson).map(([k, v]) => `<li>${k}: ${v} грн</li>`).join("")}</ul>
+      <h5>Дохід по номерах та борг:</h5>
+      <ul>${listItems}</ul>
     `;
   }
-
 </script>
 
 </body>
