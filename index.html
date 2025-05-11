@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <title>I.T Електроніка | База даних</title>
+  <title>I.T Електроніка | Перевірка боргу та ремонтів</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -78,7 +78,7 @@
 </head>
 <body>
 
-<h2>I.T Електроніка | База даних</h2>
+<h2>I.T Електроніка | Перевірка боргу та ремонтів</h2>
 
 <div class="input-group">
   <input type="text" id="phoneInput" value="+380" placeholder="Введіть номер телефону">
@@ -145,6 +145,7 @@
 
     const found = repairs.filter(r => r.phone === phone);
     if (found.length > 0) {
+      found.sort((a, b) => b.date.localeCompare(a.date));
       found.forEach(r => {
         resultDiv.innerHTML += `
           <div class="card">
