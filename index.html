@@ -14,11 +14,11 @@
       text-align: center;
       color: #333;
     }
-    .input-group, .admin-section {
+    .input-group {
       text-align: center;
       margin-top: 20px;
     }
-    input[type="text"], input[type="password"], input[type="date"] {
+    input[type="text"], input[type="password"] {
       padding: 10px;
       width: 250px;
       font-size: 16px;
@@ -39,16 +39,41 @@
       background: #2980b9;
     }
     .card {
-      background: white;
+      background: #fefefe;
       padding: 15px;
       margin: 20px auto;
       border-radius: 10px;
       box-shadow: 0 0 8px rgba(0,0,0,0.1);
       max-width: 500px;
       text-align: left;
+      border: 2px solid #6fa8dc;
     }
-    .hidden { display: none; }
-    #summary, #results { margin-top: 30px; text-align: center; }
+    .debt-alert {
+      border: 2px solid red;
+      color: red;
+      font-weight: bold;
+      padding: 10px;
+      margin: 10px auto;
+      max-width: 500px;
+      background-color: #ffe5e5;
+      border-radius: 10px;
+    }
+    .no-debt {
+      font-weight: bold;
+      color: green;
+      margin: 10px auto;
+      max-width: 500px;
+    }
+    .card p {
+      font-weight: bold;
+    }
+    #results {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -61,6 +86,15 @@
 </div>
 
 <div id="results"></div>
+<div id="adminLogin" class="input-group">
+  <input type="password" id="adminPass" placeholder="Пароль адміністратора">
+  <button onclick="login()">Увійти</button>
+</div>
+
+<div id="adminPanel" class="hidden">
+  <h3 style="text-align:center;">Адмін Панель</h3>
+  <div id="summary" class="card"></div>
+</div>
 
 <script>
   const debts = {
@@ -84,19 +118,68 @@
 
     if (phone in debts) {
       const amount = debts[phone];
-      resultDiv.innerHTML += amount > 0 ? `<p>Борг: ${amount} грн</p>` : "<p>Боргу немає</p>";
+      if (amount > 0) {
+        resultDiv.innerHTML += `<div class="debt-alert">Борг: ${amount} грн</div>`;
+      } else {
+        resultDiv.innerHTML += `<div class="no-debt">Боргу немає</div>`;
+      }
     } else {
-      resultDiv.innerHTML += "<p>Номер не знайдено в базі боргів.</p>";
+      resultDiv.innerHTML += `<div class="no-debt">Номер не знайдено в базі боргів.</div>`;
     }
 
     const found = repairs.filter(r => r.phone === phone);
     if (found.length > 0) {
       found.forEach(r => {
-        resultDiv.innerHTML += `<div class='card'><p>Пристрій: ${r.device}</p><p>Дата: ${r.date}</p><p>Сума: ${r.price}</p></div>`;
+        resultDiv.innerHTML += `
+          <div class="card">
+            <p>Пристрій: ${r.device}</p>
+            <p>Дата: ${r.date}</p>
+            <p>Сума: ${r.price}</p>
+          </div>`;
       });
     } else {
-      resultDiv.innerHTML += "<p>Ремонтних записів не знайдено.</p>";
+      resultDiv.innerHTML += `<div class="no-debt">Ремонтних записів не знайдено.</div>`;
     }
+  }
+
+  function login() {
+    const pass = document.getElementById("adminPass").value;
+    if (pass === "Ivan") {
+      document.getElementById("adminLogin").classList.add("hidden");
+      document.getElementById("adminPanel").classList.remove("hidden");
+      showSummary();
+    } else {
+      alert("Невірний пароль!");
+    }
+  }
+
+  function showSummary() {
+    const summaryDiv = document.getElementById("summary");
+    const phoneSet = new Set();
+    let total = 0;
+    const perPerson = {};
+    repairs.forEach(r => {
+      phoneSet.add(r.phone);
+      const num = parseFloat(r.price);
+      total += num;
+      if (!perPerson[r.phone]) perPerson[r.phone] = 0;
+      perPerson[r.phone] += num;
+    });
+
+    let listItems = "";
+    for (let phone in perPerson) {
+      const income = perPerson[phone];
+      const debt = debts[phone] || 0;
+      listItems += `<li>${phone}: ${income} грн | Борг: ${debt} грн</li>`;
+    }
+
+    summaryDiv.innerHTML = `
+      <h4>Звіт:</h4>
+      <p><strong>Загальний прибуток:</strong> ${total} грн</p>
+      <p><strong>Кількість унікальних клієнтів:</strong> ${phoneSet.size}</p>
+      <h5>Дохід по номерах та борг:</h5>
+      <ul>${listItems}</ul>
+    `;
   }
 </script>
 
