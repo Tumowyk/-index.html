@@ -2,478 +2,86 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Світ Електроніки — Проєкти та Інструменти</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background-color: #f4f6f8;
-      color: #333;
-      line-height: 1.6;
-    }
-
-    header, footer {
-      background-color: #003366;
-      color: #fff;
-      text-align: center;
-      padding: 30px 20px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-
-    nav {
-      background-color: #0055a5;
-      text-align: center;
-      padding: 10px 0;
-    }
-
-    nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    main {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .project {
-      background: #fff;
-      border-radius: 8px;
-      margin-bottom: 30px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-
-    .project h2 {
-      color: #0055a5;
-      margin-top: 0;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    .calculator, .community {
-      background: #e3eefc;
-      padding: 20px;
-      margin-top: 40px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    select, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    button {
-      background-color: #28a745;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #218838;
-    }
-
-    .result {
-      margin-top: 20px;
-      font-size: 18px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2em;
-      }
-      nav a {
-        display: block;
-        margin: 10px 0;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <h1>Світ Електроніки</h1>
-  <p>Теорія, проєкти, інструменти, спільнота</p>
-</header>
-
-<nav>
-  <a href="#projects">Проєкти</a>
-  <a href="#tools">Інструменти</a>
-  <a href="#community">Спільнота</a>
-</nav>
-
-<main>
-  <section id="projects">
-    <h2>Наші проєкти</h2>
-
-    <div class="project">
-      <h2>Мигалка на Arduino</h2>
-      <!-- Пост про проект "Мигалка на Arduino" -->
-<div id="blinker-project" style="margin-top: 40px;">
-  <h2>Проект: Мигалка на Arduino</h2>
-
-  <p><strong>Опис:</strong>  
-  Простий проект для новачків у світі Arduino. Ми підключаємо світлодіод (LED) до плати Arduino і змушуємо його мигати з певним інтервалом.</p>
-
-  <h3>Що потрібно:</h3>
-  <ul>
-    <li>Плата Arduino Uno або аналогічна</li>
-    <li>Світлодіод (LED)</li>
-    <li>Резистор 220 Ом</li>
-    <li>Макетна плата (breadboard)</li>
-    <li>З'єднувальні дроти</li>
-  </ul>
-
-  <h3>Схема підключення:</h3>
-  <p>Підключаємо анод (довгу ніжку) світлодіода через резистор до піну 13 на Arduino, катод (коротку ніжку) — до GND.</p>
-
-  <h3>Як це працює:</h3>
-  <p>Код увімкне світлодіод на 1 секунду, потім вимкне на 1 секунду, і так по колу. Ви побачите, як світлодіод блимає кожну секунду.</p>
-
-</div></p>
-    </div>
-
-    <div class="project">
-      <h2>Детектор світла</h2>
-      <!-- Пост про проект "Детектор світла на Arduino" -->
-<div id="light-detector-project" style="margin-top: 40px;">
-  <h2>Проект: Детектор світла на Arduino</h2>
-
-  <p><strong>Опис:</strong>  
-  У цьому проекті ми навчимо Arduino визначати рівень освітленості за допомогою фоторезистора (LDR). Ми можемо вмикати світлодіод, коли стає темно!</p>
-
-  <h3>Що потрібно:</h3>
-  <ul>
-    <li>Плата Arduino Uno або аналогічна</li>
-    <li>Фоторезистор (LDR)</li>
-    <li>Резистор 10 кОм</li>
-    <li>Світлодіод (LED)</li>
-    <li>Макетна плата (breadboard)</li>
-    <li>З'єднувальні дроти</li>
-  </ul>
-
-  <h3>Схема підключення:</h3>
-  <p>Фоторезистор підключається до аналогового входу A0, а LED до цифрового виходу, наприклад D13.</p>
-  </pre>
-
-  <h3>Як це працює:</h3>
-  <p>Фоторезистор змінює свій опір в залежності від рівня світла. Arduino зчитує цей сигнал і вмикає світлодіод, коли стає темно.</p>
-
-</div></p>
-    </div>
-
-    <div class="project">
-      <h2>Температурний датчик</h2>
-     <!-- Пост про проект "Температурний датчик на Arduino" -->
-<div id="temperature-sensor-project" style="margin-top: 40px;">
-  <h2>Проект: Температурний датчик на Arduino</h2>
-
-  <p><strong>Опис:</strong>  
-  У цьому проекті Arduino зчитує температуру за допомогою термодатчика (наприклад, LM35) і виводить значення температури в монітор порту.</p>
-
-  <h3>Що потрібно:</h3>
-  <ul>
-    <li>Плата Arduino Uno або аналогічна</li>
-    <li>Термодатчик LM35</li>
-    <li>Макетна плата (breadboard)</li>
-    <li>З'єднувальні дроти</li>
-  </ul>
-
-  <h3>Схема підключення:</h3>
-  <p>Підключіть:
-    <ul>
-      <li>Ногу VCC датчика до 5V Arduino</li>
-      <li>Ногу GND до GND Arduino</li>
-      <li>Ногу виходу (OUT) до аналогового входу A0</li>
-    </ul>
-  </p>
-  </pre>
-
-  <h3>Як це працює:</h3>
-  <p>LM35 видає напругу, пропорційну температурі. Arduino зчитує цю напругу і обчислює температуру в градусах Цельсія.</p>
-
-</div></p>
-    </div>
-
-    <div class="project">
-      <h2>Як працює павербанк</h2>
-<div id="how-powerbank-works" style="margin-top: 40px;">
-  <h2></h2>
-
-  <p><strong>Павербанк</strong> — це портативний акумулятор, який дозволяє заряджати мобільні пристрої без доступу до розетки.</p>
-
-  <h3>Основні компоненти павербанка:</h3>
-  <ul>
-    <li><strong>Акумулятор:</strong> Літій-іонний або літій-полімерний (Li-Ion або Li-Po)</li>
-    <li><strong>Плата керування живленням:</strong> Захищає батарею та забезпечує стабільну напругу</li>
-    <li><strong>Порти USB:</strong> Для зарядки пристроїв (вихід) та зарядки самого павербанку (вхід)</li>
-    <li><strong>Контролер заряду:</strong> Регулює струм і напругу для безпечної зарядки</li>
-  </ul>
-
-  <h3>Як працює процес зарядки:</h3>
-  <ol>
-    <li>Коли ви заряджаєте павербанк, електроенергія накопичується в його акумуляторі.</li>
-    <li>Коли ви підключаєте телефон, контролер знижує напругу акумулятора (3.7V) до стандартних 5V для USB-порту.</li>
-    <li>Енергія передається у ваш пристрій, заряджаючи його акумулятор.</li>
-  </ol>
-
-  <h3>Важливі функції:</h3>
-  <ul>
-    <li>Захист від перенапруги</li>
-    <li>Захист від перегріву</li>
-    <li>Захист від перезарядження та глибокої розрядки</li>
-  </ul>
-  <h3>Цікаво знати:</h3>
-  <p>Деякі павербанки підтримують функцію швидкої зарядки (Quick Charge, Power Delivery), яка дозволяє заряджати пристрої значно швидше!</p>
-
-</div>
-    </div>
-
-    <div class="project">
-      <h2>Як працює радіо-приймач</h2>
-      <!-- Пост: Як працює радіо-приймач -->
-<div id="how-radio-works" style="margin-top: 40px;">
-
-
-  <p><strong>Радіо-приймач</strong> — це пристрій, який приймає радіохвилі та перетворює їх у звук, який ми можемо чути.</p>
-
-  <h3>Основні частини радіо-приймача:</h3>
-  <ul>
-    <li><strong>Антена:</strong> Ловить радіохвилі з ефіру</li>
-    <li><strong>Тюнер:</strong> Дозволяє вибрати потрібну частоту серед багатьох</li>
-    <li><strong>Детектор:</strong> Відокремлює аудіосигнал від несучої радіохвилі</li>
-    <li><strong>Підсилювач:</strong> Підсилює слабкий сигнал для прослуховування</li>
-    <li><strong>Динамік:</strong> Відтворює звук</li>
-  </ul>
-
-  <h3>Як працює процес прийому:</h3>
-  <ol>
-    <li>Антена вловлює електромагнітні радіохвилі.</li>
-    <li>Тюнер налаштовується на потрібну частоту (наприклад, 101.1 FM).</li>
-    <li>Детектор витягує аудіосигнал із радіохвилі (модуляції).</li>
-    <li>Підсилювач робить звук достатньо гучним.</li>
-    <li>Динамік відтворює звук — і ми чуємо музику або мову!</li>
-  </ol>
-
-  <h3>Типи модуляції:</h3>
-  <ul>
-    <li><strong>AM (амплітудна модуляція):</strong> Часто для розмовного радіо</li>
-    <li><strong>FM (частотна модуляція):</strong> Вища якість для музики</li>
-  </ul>
-
-  <h3>Цікаво знати:</h3>
-  <p>Перші радіо-приймачі були дуже простими — їх навіть можна було зібрати без батареї, використовуючи енергію самої радіохвилі!</p>
-
-</div>
-    </div>
-
-    <div class="project">
-      <h2>Як працює Bluetooth</h2>
-      <!-- Пост: Як працює Bluetooth -->
-<div id="how-bluetooth-works" style="margin-top: 40px;">
-  <h2></h2>
-
-  <p><strong>Bluetooth</strong> — це технологія бездротового зв'язку на короткі відстані, яка дозволяє передавати дані між пристроями без використання кабелів.</p>
-
-  <h3>Основні особливості Bluetooth:</h3>
-  <ul>
-    <li><strong>Дальність:</strong> Зазвичай до 10 метрів (деякі версії — до 100 метрів)</li>
-    <li><strong>Частота:</strong> Працює у діапазоні 2,4 ГГц</li>
-    <li><strong>Енергоспоживання:</strong> Низьке, тому добре підходить для навушників, фітнес-браслетів і мишок</li>
-  </ul>
-
-  <h3>Як відбувається з'єднання:</h3>
-  <ol>
-    <li>Один пристрій стає "видимим" для інших (режим пошуку).</li>
-    <li>Інший пристрій знаходить його та пропонує з'єднання.</li>
-    <li>Після підтвердження створюється <strong>пара</strong> пристроїв через обмін спеціальними кодами (паролями).</li>
-    <li>Після встановлення з'єднання дані передаються без проводів.</li>
-  </ol>
-
-  <h3>Як працює передача даних:</h3>
-  <p>Bluetooth використовує радіохвилі і спеціальні протоколи для надійної та захищеної передачі інформації. Якщо з'єднання втрачається, пристрої автоматично намагаються підключитися знову.</p>
-
-  <h3>Типові застосування:</h3>
-  <ul>
-    <li>Навушники та гарнітури</li>
-    <li>Клавіатури, мишки</li>
-    <li>Передача файлів між телефонами</li>
-    <li>Розумні годинники, фітнес-трекери</li>
-    <li>Безпровідні колонки</li>
-  </ul>
-
-  <h3>Цікаво знати:</h3>
-  <p>Назва "Bluetooth" походить від імені данського короля Харальда Синьозубого (Bluetooth), який об'єднав різні племена, як Bluetooth об'єднує пристрої.</p>
-</div>
-
-
-  <section id="tools">
-    <h2>Інструменти та Поради</h2>
-
-    <div class="project">
-      <h2></h2>
-      <h2 id="soldering-iron">Паяльник: Як обрати та використовувати?</h2>
-<p>Паяльник — це інструмент для нагрівання металу з метою створення електричних з'єднань за допомогою припою.  
-Щоб правильно обрати паяльник, слід звертати увагу на його потужність (зазвичай від 30 до 60 Вт для електроніки), тип нагрівального елементу та зручність руків'я.</p>
-
-<p>Поради з використання:
-<ul>
-  <li>Розігрівай паяльник до потрібної температури перед роботою.</li>
-  <li>Очищуй жало паяльника від залишків припою за допомогою вологої губки або спеціальної латунної стружки.</li>
-  <li>Подавай припій до місця з'єднання, а не безпосередньо на жало.</li>
-  <li>Працюй у добре провітрюваному місці через виділення диму.</li>
-</ul>
-</p>
-<div class="project">
-      <h2></h2>
-      <ul>
-        <h2 id="voltmeter-basics">Вольтметр: Основи користування</h2>
-<p>Вольтметр — це прилад для вимірювання електричної напруги між двома точками електричного кола. Він є важливим інструментом у діагностиці та обслуговуванні електронних пристроїв.</p>
-
-<ul>
-  <li>Підключай вольтметр паралельно до елемента, напругу якого потрібно виміряти.</li>
-  <li>Перед вимірюванням перевір, що межа вимірювання вольтметра перевищує очікувану напругу.</li>
-  <li>Встанови правильний режим: постійна напруга (DCV) або змінна напруга (ACV) залежно від сигналу.</li>
-  <li>Не торкайся металевих частин щупів руками під час вимірювання — це може бути небезпечно та викликати похибки.</li>
-</ul>
-</p>
-  </section>
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Калькулятор резистора за кольорами</title>
+  <title>I.T Електроніка | Перевірка боргу</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      padding: 30px;
       margin: 0;
-      padding: 20px;
     }
     h2 {
       text-align: center;
       color: #333;
     }
-    .calculator {
-      background: #fff;
-      padding: 20px;
-      max-width: 400px;
-      margin: 20px auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
     .input-group {
-      margin: 15px 0;
       text-align: center;
+      margin-top: 20px;
     }
-    select, button {
+    input[type="text"] {
       padding: 10px;
+      width: 250px;
       font-size: 16px;
-      width: 90%;
-      margin-top: 8px;
-      border-radius: 8px;
+      border-radius: 5px;
       border: 1px solid #ccc;
+      margin: 5px;
     }
     button {
-      cursor: pointer;
-      background-color: #4CAF50;
+      padding: 10px 15px;
+      font-size: 16px;
+      background: #e74c3c;
       color: white;
       border: none;
-      transition: background 0.3s;
+      border-radius: 5px;
+      cursor: pointer;
     }
     button:hover {
-      background-color: #45a049;
+      background: #c0392b;
     }
     .result {
       margin-top: 20px;
-      font-size: 18px;
       text-align: center;
-      font-weight: bold;
-      color: #222;
+      font-size: 18px;
+      color: #2c3e50;
     }
   </style>
 </head>
 <body>
-  <script>
-    function calculateResistor() {
-      var color1 = parseInt(document.getElementById("color1").value);
-      var color2 = parseInt(document.getElementById("color2").value);
-      var multiplier = parseInt(document.getElementById("multiplier").value);
-      var tolerance = parseInt(document.getElementById("tolerance").value);
 
-      var resistance = (color1 * 10 + color2) * multiplier;
+<h2>Перевірка боргу | I.T Електроніка</h2>
 
-      document.getElementById("result").innerText =
-        "Опір: " + resistance.toLocaleString('uk-UA') + " Ом ± " + tolerance + "%";
-    }
-  </script>
-</script>
-
-</body>
-</html>
-  <!-- Кнопка повернення на головну -->
-  <a class="back-btn" href="index.html">← Повернутись на головну</a>
-
-</body>
-</html>
-  <section id="community" class="community">
-    <h2>Приєднуйся до спільноти "Радіотехніки"!</h2>
-    <p>Обговорення, допомога, купівля-продаж, поради від новачків до профі.</p>
-    <p><strong>Telegram:</strong> <a href="https://t.me/elekroni_top" target="_blank">t.me/elekroni_top</a></p>
-  </section>
-<!-- Розділ "Наша команда" -->
-<div id="team">
-  <h2>Наша команда</h2>
-  <p>Познайомтесь з нашою командою та слідкуйте за нами в TikTok:</p>
-  
-  <ul>
-    <li>
-      <a href="https://www.tiktok.com/@ivan63737?_t=ZM-8vr429rXji1&_r=1" target="_blank">Ivan (@ivan63737)</a>
-    </li>
-    <li>
-      <a href="https://www.tiktok.com/@nikita_12top?_t=ZM-8vr42wLYkrf&_r=1" target="_blank">Nikita (@nikita_12top)</a>
-    </li>
-    <li>
-      <a href="https://www.tiktok.com/@deduhkamykola?_t=ZM-8vr4NHP5BeX&_r=1" target="_blank">Mykola (@deduhkamykola)</a>
-    </li>
-  </ul>
+<div class="input-group">
+  <input type="text" id="phoneInput" value="+380" placeholder="Введіть номер телефону">
+  <button onclick="checkDebt()">Перевірити</button>
 </div>
-<footer>
-  <p>© 2025 Світ Електроніки. Всі права захищені.</p>
-</footer>
+
+<div class="result" id="result"></div>
+
 <script>
-  function calculateResistance() {
-    const color1 = parseInt(document.getElementById('color1').value);
-    const color2 = parseInt(document.getElementById('color2').value);
-    const multiplier = parseInt(document.getElementById('multiplier').value);
+  const debts = {
+    "+380989343224": { amount: 300, repair: "Заміна екрану", date: "2025-04-10" },
+    "+380989264172": { amount: 0, repair: "Діагностика", date: "2025-03-15" },
+    "+380680115214": { amount: 150, repair: "Ремонт камери", date: "2025-02-20" },
+    "+380966446988": { amount: 0, repair: "Заміна батареї", date: "2025-01-25" },
+    "+380688683536": { amount: 500, repair: "Комплексний ремонт", date: "2025-05-01" }
+  };
 
-    const resistance = ((color1 * 10) + color2) * multiplier;
+  function checkDebt() {
+    const phone = document.getElementById("phoneInput").value.trim();
+    const resultDiv = document.getElementById("result");
 
-    document.getElementById('result').innerText = Опір: ${resistance} Ом;
+    if (phone in debts) {
+      const { amount, repair, date } = debts[phone];
+      if (amount > 0) {
+        resultDiv.innerHTML = `<strong style="color:red;">Борг: ${amount} грн<br>Ремонт: ${repair}<br>Дата: ${date}</strong>`;
+      } else {
+        resultDiv.innerHTML = `<strong style="color:green;">Боргу немає<br>Ремонт: ${repair}<br>Дата: ${date}</strong>`;
+      }
+    } else {
+      resultDiv.innerHTML = "Номер не знайдено в базі.";
+    }
   }
 </script>
+
 </body>
 </html>
