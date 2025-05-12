@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -6,49 +7,71 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e3eff7;
-            margin: 40px;
+            background-color: #f2f2f2;
+            margin: 20px;
         }
-        .container {
-            background-color: white;
+        .block {
+            background-color: #e6f2f8;
+            border: 1px solid #ccc;
             padding: 20px;
-            border: 1px solid #aaa;
-            max-width: 800px;
-            margin: auto;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+        .content {
+            flex: 2;
+        }
+        .image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
         }
         h1 {
+            text-align: center;
             color: #003366;
+            width: 100%;
         }
-        img {
-            float: right;
-            width: 120px;
-            margin: 0 0 10px 20px;
+        h2 {
+            color: #003366;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
         }
-        .clear {
-            clear: both;
-        }
-        .bold {
+        .term {
+            color: #3366cc;
             font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Мова HTML</h1>
-        <h2>Історія мови</h2>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Tim_Berners-Lee_CP_2.jpg" alt="Тім Бернерс-Лі">
-        <p>
-            Один із творців HTML — Тім Бернерс-Лі. У 1991 році він опублікував опис мови HTML, яка призначалася для обміну науковою інформацією.
-            З часом HTML став основою для створення вебсторінок.
-        </p>
-        <div class="clear"></div>
-        <h2>Основні поняття</h2>
-        <p>
-            <span class="bold">Тег</span> — це команда браузеру, яка вказує, яким чином форматувати текст.
-        </p>
-        <p>
-            <span class="bold">Контент</span> — це текст чи зображення, що розміщується між тегами.
-        </p>
+    <h1>Мова HTML</h1>
+    <div class="block">
+        <div class="image">
+            <img src="photo.jpg" alt="Зображення HTML">
+        </div>
+        <div class="content">
+            <h2>Історія мови</h2>
+            <p>
+                Основи мови HTML уперше були запропоновані у 1991 році британським ученим <strong>Тімом Бернерс-Лі</strong> (англ. <strong>Tim Berners-Lee</strong>).
+                З того часу мова HTML зазнала значних змін. Змінювались її версії, уточнювались та доповнювались правила запису HTML-тегів.
+            </p>
+            <p>
+                У 1994 році <strong>Тім Бернерс-Лі</strong> заснував Консорціум Всесвітньої павутини <strong>W3C</strong> (англ. World Wide Web Consortium — консорціум всесвітньої павутини), 
+                який працює до сьогодні. Консорціум займається розробкою і впровадженням стандартів для Інтернету, у тому числі затверджує специфікацію мови HTML. 
+                У 2014 році був рекомендований стандарт п’ятої версії мови — <strong>HTML5</strong>.
+            </p>
+
+            <h2>Основні поняття</h2>
+            <p><span class="term">Тег</span> — це команда браузера, яка вказує, яким чином повинен бути зображений той чи інший фрагмент коду.</p>
+            <p><span class="term">Контент</span> — це текст та нетекстові об'єкти (графічні зображення, анімація, відео та ін.), що відображаються на веб-сторінці та призначені для перегляду відвідувачами веб-сторінки.</p>
+        </div>
     </div>
 </body>
 </html>
