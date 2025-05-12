@@ -1,188 +1,78 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>I.T Електроніка | Перевірка боргу та ремонтів</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Навчання з Іваном</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
-      padding: 30px;
       margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
     }
-    h2 {
-      text-align: center;
-      color: #333;
-    }
-    .input-group {
-      text-align: center;
-      margin-top: 20px;
-    }
-    input[type="text"], input[type="password"] {
-      padding: 10px;
-      width: 250px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      margin: 5px;
-    }
-    button {
-      padding: 10px 15px;
-      font-size: 16px;
-      background: #3498db;
+    header {
+      background: #0d6efd;
       color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #2980b9;
-    }
-    .card {
-      background: #fefefe;
-      padding: 15px;
-      margin: 20px auto;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-      max-width: 500px;
-      text-align: left;
-      border: 2px solid #6fa8dc;
-    }
-    .debt-alert {
-      border: 2px solid red;
-      color: red;
-      font-weight: bold;
-      padding: 10px;
-      margin: 10px auto;
-      max-width: 500px;
-      background-color: #ffe5e5;
-      border-radius: 10px;
-    }
-    .no-debt {
-      font-weight: bold;
-      color: green;
-      margin: 10px auto;
-      max-width: 500px;
-    }
-    .card p {
-      font-weight: bold;
-    }
-    #results {
-      margin-top: 30px;
+      padding: 2rem;
       text-align: center;
     }
-    .hidden {
-      display: none;
+    .section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      margin-top: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #0d6efd;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #eee;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
 
-<h2>I.T Електроніка | Перевірка боргу та ремонтів</h2>
+<header>
+  <h1>Онлайн навчання з Іваном</h1>
+  <p>Доступно. Зрозуміло. Практично.</p>
+</header>
 
-<div class="input-group">
-  <input type="text" id="phoneInput" value="+380" placeholder="Введіть номер телефону">
-  <button onclick="checkDebtAndRepairs()">Перевірити</button>
+<div class="section">
+  <h2>Про курс</h2>
+  <p>Ми навчаємо основам електроніки, пайки, роботи з мікроконтролерами та створенням власних проєктів.</p>
 </div>
 
-<div id="results"></div>
-<div id="adminLogin" class="input-group">
-  <input type="password" id="adminPass" placeholder="Пароль адміністратора">
-  <button onclick="login()">Увійти</button>
+<div class="section">
+  <h2>Що ви отримаєте?</h2>
+  <ul>
+    <li>Практичні відеоуроки</li>
+    <li>Матеріали для завантаження</li>
+    <li>Підтримку в Telegram-групі</li>
+    <li>Сертифікат після завершення</li>
+  </ul>
 </div>
 
-<div id="adminPanel" class="hidden">
-  <h3 style="text-align:center;">Адмін Панель</h3>
-  <div id="summary" class="card"></div>
+<div class="section">
+  <h2>Зареєструйтесь зараз!</h2>
+  <p>Почни свій шлях у світі електроніки вже сьогодні!</p>
+  <a class="button" href="mailto:techsupport.ivanrepair@gmail.com">Надіслати заявку</a>
 </div>
 
-<script>
-  const debts = {
-    "+380989343224": 300,
-    "+380989264172": 0,
-    "+380680115214": 150,
-    "+380966446988": 100,
-    "+380688683536": 500
-  };
-
-  const repairs = [
-    { phone: "+380989343224", device: "Пілосос", date: "2025.04.18", price: "800 грн" },
-    { phone: "+380680115214", device: "Радіо", date: "2025.04.13", price: "50 грн" },
-    { phone: "+380966446988", device: "Радіо", date: "2025.04.13", price: "500 грн" }
-  ];
-
-  function checkDebtAndRepairs() {
-    const phone = document.getElementById("phoneInput").value.trim();
-    const resultDiv = document.getElementById("results");
-    resultDiv.innerHTML = "";
-
-    if (phone in debts) {
-      const amount = debts[phone];
-      if (amount > 0) {
-        resultDiv.innerHTML += `<div class="debt-alert">Борг: ${amount} грн</div>`;
-      } else {
-        resultDiv.innerHTML += `<div class="no-debt">Боргу немає</div>`;
-      }
-    } else {
-      resultDiv.innerHTML += `<div class="no-debt">Номер не знайдено в базі боргів.</div>`;
-    }
-
-    const found = repairs.filter(r => r.phone === phone);
-    if (found.length > 0) {
-      found.forEach(r => {
-        resultDiv.innerHTML += `
-          <div class="card">
-            <p>Пристрій: ${r.device}</p>
-            <p>Дата: ${r.date}</p>
-            <p>Сума: ${r.price}</p>
-          </div>`;
-      });
-    } else {
-      resultDiv.innerHTML += `<div class="no-debt">Ремонтних записів не знайдено.</div>`;
-    }
-  }
-
-  function login() {
-    const pass = document.getElementById("adminPass").value;
-    if (pass === "Ivan") {
-      document.getElementById("adminLogin").classList.add("hidden");
-      document.getElementById("adminPanel").classList.remove("hidden");
-      showSummary();
-    } else {
-      alert("Невірний пароль!");
-    }
-  }
-
-  function showSummary() {
-    const summaryDiv = document.getElementById("summary");
-    const phoneSet = new Set();
-    let total = 0;
-    const perPerson = {};
-    repairs.forEach(r => {
-      phoneSet.add(r.phone);
-      const num = parseFloat(r.price);
-      total += num;
-      if (!perPerson[r.phone]) perPerson[r.phone] = 0;
-      perPerson[r.phone] += num;
-    });
-
-    let listItems = "";
-    for (let phone in perPerson) {
-      const income = perPerson[phone];
-      const debt = debts[phone] || 0;
-      listItems += `<li>${phone}: ${income} грн | Борг: ${debt} грн</li>`;
-    }
-
-    summaryDiv.innerHTML = `
-      <h4>Звіт:</h4>
-      <p><strong>Загальний прибуток:</strong> ${total} грн</p>
-      <p><strong>Кількість унікальних клієнтів:</strong> ${phoneSet.size}</p>
-      <h5>Дохід по номерах та борг:</h5>
-      <ul>${listItems}</ul>
-    `;
-  }
-</script>
+<footer>
+  &copy; 2025 Іван Т. | Усі права захищені
+</footer>
 
 </body>
 </html>
