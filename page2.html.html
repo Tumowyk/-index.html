@@ -1,117 +1,75 @@
-body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    background-color: #f9f9f9;
-    color: #333;
-}
-
-header {
-    background-color: #003366;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 40px;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    border-radius: 10px;
-}
-
-.image-section {
-    flex: 1;
-    min-width: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
-
-.image-section img {
-    max-width: 100%;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-}
-
-.text-section {
-    flex: 2;
-}
-
-h2 {
-    color: #003366;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 5px;
-    margin-top: 0;
-}
-
-.term {
-    font-weight: bold;
-    color: #0077cc;
-}
-
-.posts {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
-}
-
-.post-cards {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.card {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    flex: 1 1 30%;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card h3 {
-    color: #003366;
-    margin-top: 0;
-}
-
-.card p {
-    font-size: 0.95rem;
-}
-
-.card a {
-    display: inline-block;
-    margin-top: 10px;
-    color: #0077cc;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.card a:hover {
-    text-decoration: underline;
-}
-
-footer {
-    text-align: center;
-    padding: 15px;
-    background-color: #003366;
-    color: white;
-    margin-top: 40px;
-}
-
-.card img {
-    width: 100%;
-    border-radius: 6px;
-    margin-bottom: 10px;
-}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Мова HTML</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 20px;
+        }
+        .block {
+            background-color: #e6f2f8;
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+        .content {
+            flex: 2;
+        }
+        .image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .image img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+        }
+        h1 {
+            text-align: center;
+            color: #003366;
+            width: 100%;
+        }
+        h2 {
+            color: #003366;
+            
+            text-align: center;
+        }
+        .term {
+            color: #3366cc;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+        <div class="block">
+        <div class="image">
+            <img src="images/berners-lee.jpg" alt="Тім Бернерс-Лі">
+        </div>
+        <div class="content">
+            <h2>Мова HTML</h2>
+            <h2>Історія мови</h2>
+            <p>
+                Основи мови HTML уперше були запропоновані у 1991 році британським ученим <strong>Тімом Бернерс-Лі</strong> (англ. <strong>Tim Berners-Lee</strong>).
+                З того часу мова HTML зазнала значних змін. Змінювались її версії, уточнювались та доповнювались правила запису HTML-тегів.
+            </p>
+            <p>
+                У 1994 році <strong>Тім Бернерс-Лі</strong> заснував Консорціум Всесвітньої павутини <strong>W3C</strong> (англ. World Wide Web Consortium — консорціум всесвітньої павутини), 
+                який працює до сьогодні. Консорціум займається розробкою і впровадженням стандартів для Інтернету, у тому числі затверджує специфікацію мови HTML. 
+                У 2014 році був рекомендований стандарт п’ятої версії мови — <strong>HTML5</strong>.
+            </p>
+            <h2>Основні поняття</h2>
+            <p><span class="term">Тег</span> — це команда браузера, яка вказує, яким чином повинен бути зображений той чи інший фрагмент коду.</p>
+            <p><span class="term">Контент</span> — це текст та нетекстові об'єкти (графічні зображення, анімація, відео та ін.), що відображаються на веб-сторінці та призначені для перегляду відвідувачами веб-сторінки.</p>
+        </div>
+    </div>
+</body>
+</html>
