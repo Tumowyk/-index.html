@@ -2,80 +2,182 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Галерея ремонтів | ІТ Електроніка</title>
+  <title>База даних клієнтів | І.Т Електроніка</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      padding: 30px;
       margin: 0;
-      padding: 0;
     }
-    header {
-      background-color: #0057b7;
-      color: white;
-      padding: 20px;
+    h2 {
       text-align: center;
+      color: #333;
     }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      padding: 20px;
+    .input-group {
+      text-align: center;
+      margin-top: 20px;
     }
-    .item {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-    .item img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .caption {
+    input[type="text"], input[type="password"] {
       padding: 10px;
-      text-align: center;
-      font-size: 14px;
+      width: 250px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin: 5px;
     }
-    footer {
-      text-align: center;
-      background: #222;
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      background: #3498db;
       color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    .card {
+      background: #fefefe;
+      padding: 15px;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      max-width: 500px;
+      text-align: left;
+      border: 2px solid #6fa8dc;
+    }
+    .debt-alert {
+      border: 2px solid red;
+      color: red;
+      font-weight: bold;
       padding: 10px;
+      margin: 10px auto;
+      max-width: 500px;
+      background-color: #ffe5e5;
+      border-radius: 10px;
+    }
+    .no-debt {
+      font-weight: bold;
+      color: green;
+      margin: 10px auto;
+      max-width: 500px;
+    }
+    .card p {
+      font-weight: bold;
+    }
+    #results {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Галерея ремонтів</h1>
-  <p>Фото з реальних робіт нашої майстерні</p>
-</header>
+<h2>База даних клієнтів | І.Т Електроніка</h2>
 
-<div class="gallery">
-  <div class="item">
-    <img src="repair1.jpg" alt="Приклад ремонту">
-    <div class="caption">Заміна роз'єму живлення</div>
-  </div>
-  <div class="item">
-    <img src="repair2.jpg" alt="Приклад ремонту">
-    <div class="caption">Пайка відеочіпа</div>
-  </div>
-  <div class="item">
-    <img src="repair3.jpg" alt="Приклад ремонту">
-    <div class="caption">Чистка від пилу</div>
-  </div>
-  <div class="item">
-    <img src="repair4.jpg" alt="Приклад ремонту">
-    <div class="caption">Заміна екрану на планшеті</div>
-  </div>
+<div class="input-group">
+  <input type="text" id="phoneInput" value="+380" placeholder="Введіть номер телефону">
+  <button onclick="checkDebtAndRepairs()">Перевірити</button>
 </div>
 
-<footer>
-  <p>&copy; 2025 ІТ Електроніка</p>
-</footer>
+<div id="results"></div>
+<div id="adminLogin" class="input-group">
+  <input type="password" id="adminPass" placeholder="Пароль адміністратора">
+  <button onclick="login()">Увійти</button>
+</div>
+
+<div id="adminPanel" class="hidden">
+  <h3 style="text-align:center;">Адмін Панель</h3>
+  <div id="summary" class="card"></div>
+</div>
+
+<script>
+  const debts = {
+    "+380989264172": 150
+  };
+
+  const repairs = [
+    { phone: "+380989264172", device: "прожекор +Датчик руху+вимикач", date: "2025.05.27", price: "150 грн", image: "img/prozhektor.jpg" }
+  ];
+
+  function checkDebtAndRepairs() {
+    const phone = document.getElementById("phoneInput").value.trim();
+    const resultDiv = document.getElementById("results");
+    resultDiv.innerHTML = "";
+
+    if (phone in debts) {
+      const amount = debts[phone];
+      if (amount > 0) {
+        resultDiv.innerHTML += `<div class="debt-alert">Борг: ${amount} грн</div>`;
+      } else {
+        resultDiv.innerHTML += `<div class="no-debt">Боргу немає</div>`;
+      }
+    } else {
+      resultDiv.innerHTML += `<div class="no-debt">Номер не знайдено в базі боргів.</div>`;
+    }
+
+    const found = repairs.filter(r => r.phone === phone);
+    if (found.length > 0) {
+      found.sort((a, b) => b.date.localeCompare(a.date));
+      found.forEach(r => {
+        resultDiv.innerHTML += `
+          <div class="card">
+            <p>Пристрій: ${r.device}</p>
+            <p>Дата: ${r.date}</p>
+            <p>Сума: ${r.price}</p>
+            ${r.image ? `<img src="${r.image}" alt="Фото" style="max-width:100%;margin-top:10px;border-radius:8px;">` : ''}
+          </div>`;
+      });
+    } else {
+      resultDiv.innerHTML += `<div class="no-debt">Ремонтних записів не знайдено.</div>`;
+    }
+  }
+
+  function login() {
+    const pass = document.getElementById("adminPass").value;
+    if (pass === "Ivan") {
+      document.getElementById("adminLogin").classList.add("hidden");
+      document.getElementById("adminPanel").classList.remove("hidden");
+      showSummary();
+    } else {
+      alert("Невірний пароль!");
+    }
+  }
+
+  function showSummary() {
+    const summaryDiv = document.getElementById("summary");
+    const phoneSet = new Set();
+    let total = 0;
+    const perPerson = {};
+    repairs.forEach(r => {
+      phoneSet.add(r.phone);
+      const num = parseFloat(r.price);
+      total += num;
+      if (!perPerson[r.phone]) perPerson[r.phone] = 0;
+      perPerson[r.phone] += num;
+    });
+
+    let listItems = "";
+    for (let phone in perPerson) {
+      const income = perPerson[phone];
+      const debt = debts[phone] || 0;
+      listItems += `<li>${phone}: ${income} грн | Борг: ${debt} грн</li>`;
+    }
+
+    summaryDiv.innerHTML = `
+      <h4>Звіт:</h4>
+      <p><strong>Загальний прибуток:</strong> ${total} грн</p>
+      <p><strong>Кількість унікальних клієнтів:</strong> ${phoneSet.size}</p>
+      <h5>Дохід по номерах та борг:</h5>
+      <ul>${listItems}</ul>
+    `;
+  }
+</script>
 
 </body>
 </html>
