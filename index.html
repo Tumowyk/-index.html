@@ -152,6 +152,7 @@
             <p>Пристрій: ${r.device}</p>
             <p>Дата: ${r.date}</p>
             <p>Сума: ${r.price}</p>
+            ${r.image ? `<img src="${r.image}" alt="Фото" style="max-width:100%;margin-top:10px;border-radius:8px;">` : ""}
           </div>`;
       });
     } else {
