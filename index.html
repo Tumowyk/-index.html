@@ -152,7 +152,6 @@
             <p>Пристрій: ${r.device}</p>
             <p>Дата: ${r.date}</p>
             <p>Сума: ${r.price}</p>
-            ${r.image ? `<img src="${r.image}" alt="Фото" style="max-width:100%;margin-top:10px;border-radius:8px;">` : ''}
           </div>`;
       });
     } else {
@@ -176,10 +175,25 @@
     const phoneSet = new Set();
     let total = 0;
     const perPerson = {};
+    const monthlyTotals = {};
+
+    const now = new Date();
+    for (let i = 0; i < 12; i++) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const key = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}`;
+      monthlyTotals[key] = 0;
+    }
+
     repairs.forEach(r => {
       phoneSet.add(r.phone);
       const num = parseFloat(r.price);
       total += num;
+
+      const monthKey = r.date.slice(0, 7);
+      if (monthlyTotals.hasOwnProperty(monthKey)) {
+        monthlyTotals[monthKey] += num;
+      }
+
       if (!perPerson[r.phone]) perPerson[r.phone] = 0;
       perPerson[r.phone] += num;
     });
@@ -191,15 +205,38 @@
       listItems += `<li>${phone}: ${income} грн | Борг: ${debt} грн</li>`;
     }
 
+    let monthlyTable = `
+      <h5>Дохід за останні 12 місяців:</h5>
+      <table style="width:100%;border-collapse:collapse;text-align:left;">
+        <thead>
+          <tr>
+            <th style="border-bottom:1px solid #ccc;padding:5px;">Місяць</th>
+            <th style="border-bottom:1px solid #ccc;padding:5px;">Дохід</th>
+          </tr>
+        </thead>
+        <tbody>
+    `;
+
+    Object.keys(monthlyTotals).sort().reverse().forEach(month => {
+      monthlyTable += `
+        <tr>
+          <td style="padding:5px;">${month}</td>
+          <td style="padding:5px;">${monthlyTotals[month]} грн</td>
+        </tr>
+      `;
+    });
+
+    monthlyTable += `</tbody></table>`;
+
     summaryDiv.innerHTML = `
       <h4>Звіт:</h4>
       <p><strong>Загальний прибуток:</strong> ${total} грн</p>
       <p><strong>Кількість унікальних клієнтів:</strong> ${phoneSet.size}</p>
       <h5>Дохід по номерах та борг:</h5>
       <ul>${listItems}</ul>
+      ${monthlyTable}
     `;
   }
 </script>
-
 </body>
 </html>
