@@ -1,183 +1,136 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>База даних клієнтів | І.Т Електроніка</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>anpv.music</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #e0eafc, #cfdef3);
-      padding: 30px;
       margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #4b4747;
+      color: white;
+      scroll-behavior: smooth;
+    }
+    header {
+      background-color: #3f3a3a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #d4c36b;
+    }
+    .hero {
+      background: url('background.jpg') no-repeat center center/cover;
+      height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cta-button {
+      background-color: transparent;
+      border: 1px solid #d4c36b;
+      color: #d4c36b;
+      padding: 15px 30px;
+      font-size: 18px;
+      text-decoration: none;
+    }
+    .cta-button:hover {
+      background-color: #d4c36b;
+      color: black;
+    }
+    section {
+      padding: 60px 40px;
     }
     h2 {
-      text-align: center;
-      color: #333;
+      color: #d4c36b;
+      font-size: 32px;
+      margin-bottom: 20px;
     }
-    .input-group {
-      text-align: center;
+    .music-player, .video-player {
       margin-top: 20px;
-    }
-    input[type="text"], input[type="password"] {
-      padding: 10px;
-      width: 250px;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      margin: 5px;
-    }
-    button {
-      padding: 10px 15px;
-      font-size: 16px;
-      background: #3498db;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #2980b9;
-    }
-    .card {
-      background: #fefefe;
-      padding: 15px;
-      margin: 20px auto;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-      max-width: 500px;
-      text-align: left;
-      border: 2px solid #6fa8dc;
-    }
-    .debt-alert {
-      border: 2px solid red;
-      color: red;
-      font-weight: bold;
-      padding: 10px;
-      margin: 10px auto;
-      max-width: 500px;
-      background-color: #ffe5e5;
-      border-radius: 10px;
-    }
-    .no-debt {
-      font-weight: bold;
-      color: green;
-      margin: 10px auto;
-      max-width: 500px;
-    }
-    .card p {
-      font-weight: bold;
-    }
-    #results {
-      margin-top: 30px;
-      text-align: center;
-    }
-    .hidden {
-      display: none;
     }
   </style>
 </head>
 <body>
 
-<h2>База даних клієнтів | І.Т Електроніка</h2>
+  <header>
+    <div class="logo">anpv.music</div>
+    <nav>
+      <a href="#home">Головна</a>
+      <a href="#about">Про мене</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#music">Моя музика</a>
+      <a href="#contact">Контакти</a>
+    </nav>
+  </header>
 
-<div class="input-group">
-  <input type="text" id="phoneInput" value="+380" placeholder="Введіть номер телефону">
-  <button onclick="checkDebtAndRepairs()">Перевірити</button>
+  <section id="home" class="hero">
+    <a class="cta-button" href="#music">Слухати мій новий альбом ></a>
+  </section>
+
+  <section id="about">
+    <h2>Про мене</h2>
+    <p>Привіт! Я — ANPV, незалежна співачка та авторка пісень. Моя музика — це щира емоція, глибокі тексти та душевне звучання. Дякую, що ви тут!</p>
+  </section>
+
+  <section id="gallery">
+    <h2>Галерея</h2>
+    <p>Фото з виступів, закулісся та творчого процесу.</p>
+    <img src="background.jpg" alt="Галерея" style="width:100%; max-width:600px; border-radius: 10px;">
+  </section>
+
+  <section id="music">
+    <h2>Моя музика</h2>
+    <p>Слухайте мої треки онлайн:</p>
+    <div class="music-player">
+      <audio controls>
+        <source src="song.mp3" type="audio/mp3">
+        Ваш браузер не підтримує аудіо.
+      </audio>
+    </div>
+    <p>Дивіться відео на YouTube:</p>
+    <div class="video-player">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="YouTube video" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Контакти</h2>
+    <p>Зв'яжіться зі мною через соцмережі або електронну пошту: anpv.music@example.com</p>
+  </section>
+
+
+<!-- Відео (локальне) -->
+<video controls width="100%" style="max-width: 800px; margin: 20px auto; display: block;">
+  <source src="video/anpv_sample.mp4" type="video/mp4">
+  Ваш браузер не підтримує відео тег.
+</video>
+
+
+<!-- Контакти -->
+<div style="text-align: center; margin-top: 40px;">
+  <h2>Контакти</h2>
+  <p><a href="https://t.me/anpv_official" target="_blank">Telegram канал</a></p>
+  <p><a href="https://youtube.com/@anpvmusic?si=tw-7BrA8QE5vygZb" target="_blank">YouTube</a></p>
+  <p><a href="https://www.tiktok.com/@anpv.music?_t=ZS-8wq7fA8aHWa&_r=1" target="_blank">TikTok</a></p>
 </div>
-
-<div id="results"></div>
-<div id="adminLogin" class="input-group">
-  <input type="password" id="adminPass" placeholder="Пароль адміністратора">
-  <button onclick="login()">Увійти</button>
-</div>
-
-<div id="adminPanel" class="hidden">
-  <h3 style="text-align:center;">Адмін Панель</h3>
-  <div id="summary" class="card"></div>
-</div>
-
-<script>
-  const debts = {
-    "+380989264172": 150
-  };
-
-  const repairs = [
-    { phone: "+380989264172", device: "прожекор +Датчик руху+вимикач", date: "2025.05.27", price: "150 грн", image: "img/prozhektor.jpg" }
-  ];
-
-  function checkDebtAndRepairs() {
-    const phone = document.getElementById("phoneInput").value.trim();
-    const resultDiv = document.getElementById("results");
-    resultDiv.innerHTML = "";
-
-    if (phone in debts) {
-      const amount = debts[phone];
-      if (amount > 0) {
-        resultDiv.innerHTML += `<div class="debt-alert">Борг: ${amount} грн</div>`;
-      } else {
-        resultDiv.innerHTML += `<div class="no-debt">Боргу немає</div>`;
-      }
-    } else {
-      resultDiv.innerHTML += `<div class="no-debt">Номер не знайдено в базі боргів.</div>`;
-    }
-
-    const found = repairs.filter(r => r.phone === phone);
-    if (found.length > 0) {
-      found.sort((a, b) => b.date.localeCompare(a.date));
-      found.forEach(r => {
-        resultDiv.innerHTML += `
-          <div class="card">
-            <p>Пристрій: ${r.device}</p>
-            <p>Дата: ${r.date}</p>
-            <p>Сума: ${r.price}</p>
-            ${r.image ? `<img src="${r.image}" alt="Фото" style="max-width:100%;margin-top:10px;border-radius:8px;">` : ''}
-          </div>`;
-      });
-    } else {
-      resultDiv.innerHTML += `<div class="no-debt">Ремонтних записів не знайдено.</div>`;
-    }
-  }
-
-  function login() {
-    const pass = document.getElementById("adminPass").value;
-    if (pass === "Ivan") {
-      document.getElementById("adminLogin").classList.add("hidden");
-      document.getElementById("adminPanel").classList.remove("hidden");
-      showSummary();
-    } else {
-      alert("Невірний пароль!");
-    }
-  }
-
-  function showSummary() {
-    const summaryDiv = document.getElementById("summary");
-    const phoneSet = new Set();
-    let total = 0;
-    const perPerson = {};
-    repairs.forEach(r => {
-      phoneSet.add(r.phone);
-      const num = parseFloat(r.price);
-      total += num;
-      if (!perPerson[r.phone]) perPerson[r.phone] = 0;
-      perPerson[r.phone] += num;
-    });
-
-    let listItems = "";
-    for (let phone in perPerson) {
-      const income = perPerson[phone];
-      const debt = debts[phone] || 0;
-      listItems += `<li>${phone}: ${income} грн | Борг: ${debt} грн</li>`;
-    }
-
-    summaryDiv.innerHTML = `
-      <h4>Звіт:</h4>
-      <p><strong>Загальний прибуток:</strong> ${total} грн</p>
-      <p><strong>Кількість унікальних клієнтів:</strong> ${phoneSet.size}</p>
-      <h5>Дохід по номерах та борг:</h5>
-      <ul>${listItems}</ul>
-    `;
-  }
-</script>
 
 </body>
 </html>
