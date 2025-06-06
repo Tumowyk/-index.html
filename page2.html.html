@@ -1,406 +1,112 @@
 <!DOCTYPE html>
-
 <html lang="uk">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>anpv.music</title>
-<style>
-    body {
-      margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background-color: #4b4747;
-      color: white;
-      scroll-behavior: smooth;
-    }
-    header {
-      background-color: #3f3a3a;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-    }
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-    }
-    nav a:hover {
-      color: #d4c36b;
-    }
-    .hero {
-      background: url('background.jpg') no-repeat center center/cover;
-      height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .cta-button {
-      background-color: transparent;
-      border: 1px solid #d4c36b;
-      color: #d4c36b;
-      padding: 15px 30px;
-      font-size: 18px;
-      text-decoration: none;
-    }
-    .cta-button:hover {
-      background-color: #d4c36b;
-      color: black;
-    }
-    section {
-      padding: 60px 40px;
-    }
-    h2 {
-      color: #d4c36b;
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-    .music-player, .video-player {
-      margin-top: 20px;
-    }
-  </style>
-<style>
-    @media (max-width: 600px) {
-      section {
-        padding: 30px 20px;
-      }
-      h2 {
-        font-size: 24px;
-      }
-      .cta-button {
-        padding: 10px 20px;
-        font-size: 16px;
-      }
-      video {
-        width: 200px !important;
-      }
-      audio {
-        width: 100% !important;
-      }
-      img {
-        max-width: 100% !important;
-        height: auto !important;
-      }
-/* Загальні стилі для мобільної адаптації */
-body {
-  margin: 0;
-  font-family: sans-serif;
-  line-height: 1.5;
-}
-
-/* Хедер */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: #222;
-  color: #fff;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.logo {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.burger {
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: none;
-}
-
-/* Меню */
-nav {
-  display: flex;
-  gap: 15px;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 1rem;
-}
-
-@media (max-width: 768px) {
-  .burger {
-    display: block;
-  }
-
-  nav {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    background-color: #333;
-    width: 100%;
-    padding: 10px 20px;
-  }
-
-  nav.active {
-    display: flex;
-  }
-
-  nav a {
-    padding: 10px 0;
-    font-size: 1.2rem;
-  }
-}
-
-/* Додай стилі до інших елементів як потрібно */
-    }
-  </style>
-<style>
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255,105,180, 0.7); }
-  70% { box-shadow: 0 0 0 15px rgba(255,105,180, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255,105,180, 0); }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свято-Успенський собор — Володимир</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
-<div class="logo">anpv.music</div>
-<nav>
-<a href="#home">Головна</a>
-<a href="#about">Про мене</a>
-<a href="#music">Моя музика</a>
-<a href="#contact">Контакти</a>
-</nav>
-</header>
-<section class="hero" id="home" style="flex-direction: column;">
-<a class="cta-button" href="#music">Слухати мій новий альбом &gt;</a>
-<div style="margin-top: 20px; text-align: center;">
-<a href="https://www.tiktok.com/@anpv.music/live" style="
-      font-size: 20px;
-      font-weight: bold;
-      color: #ff69b4;
-      text-decoration: none;
-      border: 2px solid #ff69b4;
-      padding: 10px 20px;
-      border-radius: 10px;
-      display: inline-block;
-      background-color: black;
-      animation: pulse 1.5s infinite;
-    " target="_blank">🔴 Я у прямому ефірі — дивитися</a>
-</div>
-</section>
-<section id="about">
-<h2>Про мене</h2>
-<p>Привіт! Я — Ангеліна, незалежна співачка та авторка пісень. Моя музика — це щира емоція, глибокі тексти та душевне звучання. Дякую, що ви тут!</p>
-</section>
-<section id="concerts" style="
-  color: #fff;
-  border: 3px solid #00ffcc;
-  border-radius: 20px;
-  padding: 30px;
-  margin: 40px auto;
-  max-width: 800px;
-  background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
-  box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
-">
-<h2 style="font-size: 36px; color: #00ffcc; text-align: center;">Найближчі концерти</h2>
-<ul style="list-style: none; padding: 0; font-size: 18px; text-align: center;">
-<div style="margin-top: 30px; text-align: center;">
-<img alt="Концерт ANPV" src="concert.jpg" style="max-width: 100%; border-radius: 15px; box-shadow: 0 0 12px rgba(0,255,204,0.3);"/>
-</div>
-</ul></section>
-<section id="music" style="
-    background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
-    color: #fff;
-    border: 3px solid #d4c36b;
-    border-radius: 20px;
-    padding: 30px;
-    margin: 40px auto;
-    max-width: 600px;
-    box-shadow: 0 0 20px rgba(212, 195, 107, 0.4);
-  ">
-<h2 style="font-size: 36px; color: #d4c36b; text-align: center;">Моя музика</h2>
-<p style="font-size: 18px; text-align: center; margin-bottom: 30px;">Слухайте мої треки онлайн:</p>
-<div class="music-player" style="margin-bottom: 20px;">
-<p style="font-size: 18px; color: #d4c36b; margin: 10px 0 5px;">ANPV MUSIC – До війни</p>
-<audio controls="" style="width: 100%; border-radius: 10px; outline: none;">
-<source src="ANPV MUSIC – До війни.mp3" type="audio/mp3"/>
-        Ваш браузер не підтримує аудіо.
-      </audio>
-<div class="music-player" style="margin-bottom: 20px;">
-<p style="font-size: 18px; color: #d4c36b; margin: 10px 0 5px;">ANPV MUSIC - ТИ І Я</p>
-<audio controls="" style="width: 100%; border-radius: 10px; outline: none;">
-<source src="ANPV MUSIC - ТИ І Я.mp3" type="audio/mp3"/>
-    Ваш браузер не підтримує аудіо.
-  </audio>
-</div>
-<div class="music-player" style="margin-bottom: 20px;">
-<p style="font-size: 18px; color: #d4c36b; margin: 10px 0 5px;">ANPV MUSIC - Під небом свободи</p>
-<audio controls="" style="width: 100%; border-radius: 10px; outline: none;">
-<source src="ANPV MUSIC - Під небом свободи.mp3" type="audio/mp3"/>
-    Ваш браузер не підтримує аудіо.
-  </audio>
-</div>
-<div class="music-player" style="margin-bottom: 20px;">
-<p style="font-size: 18px; color: #d4c36b; margin: 10px 0 5px;">ANPV MUSIC - Не люби</p>
-<audio controls="" style="width: 100%; border-radius: 10px; outline: none;">
-<source src="ANPV MUSIC - Не люби.mp3" type="audio/mp3"/>
-    Ваш браузер не підтримує аудіо.
-  </audio>
-</div>
-<div class="music-player" style="margin-bottom: 20px;">
-<p style="font-size: 18px; color: #d4c36b; margin: 10px 0 5px;">ANPV MUSIC - Ісорія кохання</p>
-<audio controls="" style="width: 100%; border-radius: 10px; outline: none;">
-<source src="ANPV MUSIC - Ісорія кохання.mp3" type="audio/mp3"/>
-    Ваш браузер не підтримує аудіо.
-  </audio>
-</div>
-<div class="music-player" style="margin-bottom: 20px;">
-<p style="font-size: 18px; color: #d4c36b; margin: 10px 0 5px;">ANPV MUSIC - Дві-Різні-Сторони</p>
-<audio controls="" style="width: 100%; border-radius: 10px; outline: none;">
-<source src="ANPV MUSIC - Дві-Різні-Сторони.mp3" type="audio/mp3"/>
-    Ваш браузер не підтримує аудіо.
-  </audio>
-</div>
-<div class="music-player" style="margin-bottom: 20px;">
-<p style="font-size: 18px; color: #d4c36b; margin: 10px 0 5px;">ANPV MUSIC - Далеко</p>
-<audio controls="" style="width: 100%; border-radius: 10px; outline: none;">
-<source src="ANPV MUSIC - Далеко.mp3" type="audio/mp3"/>
-    Ваш браузер не підтримує аудіо.
-  </audio>
-</div>
-<script>
-  // Зупиняє всі інші медіа при старті нового
-  document.addEventListener('play', function(e) {
-    const allMedia = document.querySelectorAll('audio, video');
-    allMedia.forEach(media => {
-      if (media !== e.target && !media.paused) {
-        media.pause();
-      }
-    });
-  }, true);
-
-  // Додає автозапуск наступного медіа при завершенні поточного
-  window.addEventListener('DOMContentLoaded', () => {
-    const allMedia = Array.from(document.querySelectorAll('audio, video'));
-
-    allMedia.forEach((media, index) => {
-      media.addEventListener('ended', () => {
-        const nextMedia = allMedia[index + 1];
-        if (nextMedia) {
-          nextMedia.play();
-        }
-      });
-    });
-  });
-</script>
-<p style="color: #d4c36b; font-size: 20px; font-weight: bold; margin-top: 10px;">Прослухано: <span id="track1-count">0</span> разів</p><a href="https://open.spotify.com/artist/..." style="color: #1DB954; display: inline-block; margin-top: 10px; font-size: 18px; font-weight: bold; text-decoration: none; border: 2px solid #1DB954; padding: 8px 16px; border-radius: 10px;" target="_blank">🎵 Слухати на Spotify</a></div>
-</section>
-<div style="
-    display: flex;
-    gap: 20px;
-    margin-top: 30px;
-    padding: 20px;
-    overflow-x: auto;
-    background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
-    border: 2px solid #444;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
-  ">
-<video controls="" style="
-      width: 250px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-      outline: none;
-    ">
-<source src="video_2025-06-01_14-03-44.mp4" type="video/mp4"/>
-      Ваш браузер не підтримує відео тег.
-    </video>
-<video controls="" style="
-      width: 250px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-      outline: none;
-    ">
-<source src="video2.mp4" type="video/mp4"/>
-      Ваш браузер не підтримує відео тег.
-    </video>
-<video controls="" style="
-      width: 250px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-      outline: none;
-    ">
-<source src="video3.mp4" type="video/mp4"/>
-      Ваш браузер не підтримує відео тег.
-    </video>
-<video controls="" style="
-      width: 250px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
-      outline: none;
-    ">
-<source src="video4.mp4" type="video/mp4"/>
-      Ваш браузер не підтримує відео тег.
-    </video>
-</div>
-<div style="
-  display: flex;
-  gap: 20px;
-  margin-top: 30px;
-  padding: 20px;
-  overflow-x: auto;
-  background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
-  border: 2px solid #444;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.2);
-">
-<video controls="" style="width: 250px; border-radius: 15px; box-shadow: 0 4px 12px rgba(255,255,255,0.1);">
-<source src="video5.mp4" type="video/mp4"/>
-</video>
-<video controls="" style="width: 250px; border-radius: 15px; box-shadow: 0 4px 12px rgba(255,255,255,0.1);">
-<source src="video6.mp4" type="video/mp4"/>
-</video>
-</div>
-<section id="contact" style="
-    color: #fff;
-    border: 3px solid #ffcc00;
-    border-radius: 20px;
-    padding: 30px;
-    margin: 40px auto;
-    max-width: 600px;
-    background: linear-gradient(145deg, #1e1e1e, #2c2c2c);
-    box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
-  ">
-<h2 style="font-size: 36px; color: #ffcc00; text-align: center;">Контакти</h2>
-<p style="text-align: center;">
-<a href="https://t.me/anpv_official" style="font-size: 20px; color: #00bfff; font-weight: bold; text-decoration: none;" target="_blank">Telegram канал</a>
-</p>
-<p style="text-align: center;">
-<a href="https://youtube.com/@anpvmusic?si=tw-7BrA8QE5vygZb" style="font-size: 20px; color: #ff4444; font-weight: bold; text-decoration: none;" target="_blank">YouTube</a>
-</p>
-<p style="text-align: center;">
-<a href="https://www.tiktok.com/@anpv.music?_t=ZS-8wq7fA8aHWa&amp;_r=1" style="font-size: 20px; color: #ff69b4; font-weight: bold; text-decoration: none;" target="_blank">TikTok</a>
-</p>
-</section>
-<script>
-  const audio1 = document.querySelector("audio");
-  const counter1 = document.getElementById("track1-count");
-
-  let count = localStorage.getItem("track1-plays") || 0;
-  counter1.textContent = count;
-
-  audio1.addEventListener("play", () => {
-    count++;
-    localStorage.setItem("track1-plays", count);
-    counter1.textContent = count;
-  });
-</script></body>
+    <header>
+        <h1>Свято-Успенський кафедральний собор</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Головна</a></li>
+                <li><a href="#">Історія</a></li>
+                <li><a href="#">Галерея</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <img src="sobor.jpg" alt="Свято-Успенський кафедральний собор">
+            <div class="overlay">
+                <h2>Перлина духовності Волині</h2>
+                <p>Один із найдавніших храмів України, що бере початок з княжої доби.</p>
+            </div>
+        </section>
+        <section class="info">
+            <h3>Про собор</h3>
+            <b>Свято-Успенський кафедральний собор у місті Володимир — велична памʼятка християнської архітектури, що є частиною національної спадщини України. Його історія сягає часів Володимира Великого, а сучасна будівля поєднує в собі давні традиції та сучасне духовне життя.</b>
+        </section>
+        <section class="history">
+            <h3>Історія</h3>
+            <p>Історія Свято-Успенського собору починається в далекому X столітті, коли князь Володимир Великий охрестив Русь. В той час у Володимирі-Волинському зʼявилася перша християнська святиня — дерев’яна церква, присвячена Успінню Пресвятої Богородиці.</p>
+            <p>У XI–XII століттях з ініціативи місцевих князів на місці дерев’яної церкви було зведено кам’яний храм, який став головною святинею Волині. Собор неодноразово знищувався ворожими набігами та пожежами, але кожного разу його відбудовували з ще більшою величчю. У період монголо-татарської навали святиня служила не лише духовним осередком, а й захисною спорудою для мешканців міста.</p>
+            <p>У XVI–XVIII століттях собор зазнавав перебудов у стилі ренесансу та бароко. Проте в XIX столітті, після включення Волині до складу Російської імперії, Успенський собор набуває рис візантійської архітектури. У радянський період храм було частково закрито, але віруючі зберегли його святість, проводячи служби навіть у підпіллі.</p>
+            <p>Після відновлення незалежності України собор відродився як духовний центр Волині. Нині він є осередком православної віри, памʼяткою національного значення та популярним місцем паломництва. Його стіни зберігають багатовікову історію боротьби, віри та відродження українського духу.</p>
+            <img src="drevyanyi_sobor.jpg" alt="Дерев'яний собор до нашої ери">
+        </section>
+        <section class="gallery">
+            <h3>Галерея</h3>
+            <div class="gallery-grid">
+                <img src="images/photo1.jpg" alt="Фото 1">
+                <img src="images/photo2.jpg" alt="Фото 2">
+                <img src="images/photo3.jpg" alt="Фото 3">
+                <img src="images/photo4.jpg" alt="Фото 4">
+                <img src="images/photo5.jpg" alt="Фото 5">
+                <img src="images/photo6.jpg" alt="Фото 6">
+                <img src="images/photo7.jpg" alt="Фото 7">
+                <img src="images/photo8.jpg" alt="Фото 8">
+                <img src="images/photo9.jpg" alt="Фото 9">
+                <img src="images/photo10.jpg" alt="Фото 10">
+                <img src="images/photo11.jpg" alt="Фото 11">
+                <img src="images/photo12.jpg" alt="Фото 12">
+                <img src="images/photo13.jpg" alt="Фото 13">
+                <img src="images/photo14.jpg" alt="Фото 14">
+                <img src="images/photo15.jpg" alt="Фото 15">
+                <img src="images/photo16.jpg" alt="Фото 16">
+                <img src="images/photo17.jpg" alt="Фото 17">
+                <img src="images/photo18.jpg" alt="Фото 18">
+                <img src="images/photo19.jpg" alt="Фото 19">
+                <img src="images/photo20.jpg" alt="Фото 20">
+                <img src="images/photo21.jpg" alt="Фото 21">
+                <img src="images/photo22.jpg" alt="Фото 22">
+                <img src="images/photo23.jpg" alt="Фото 23">
+                <img src="images/photo24.jpg" alt="Фото 24">
+                <img src="images/photo25.jpg" alt="Фото 25">
+                <img src="images/photo26.jpg" alt="Фото 26">
+                <img src="images/photo27.jpg" alt="Фото 27">
+                <img src="images/photo28.jpg" alt="Фото 28">
+                <img src="images/photo29.jpg" alt="Фото 29">
+                <img src="images/photo30.jpg" alt="Фото 30">
+                <img src="images/photo31.jpg" alt="Фото 31">
+                <img src="images/photo32.jpg" alt="Фото 32">
+                <img src="images/photo33.jpg" alt="Фото 33">
+                <img src="images/photo34.jpg" alt="Фото 34">
+                <img src="images/photo35.jpg" alt="Фото 35">
+                <img src="images/photo36.jpg" alt="Фото 36">
+                <img src="images/photo37.jpg" alt="Фото 37">
+                <img src="images/photo38.jpg" alt="Фото 38">
+                <img src="images/photo39.jpg" alt="Фото 39">
+                <img src="images/photo40.jpg" alt="Фото 40">
+                <img src="images/photo41.jpg" alt="Фото 41">
+                <img src="images/photo42.jpg" alt="Фото 42">
+                <img src="images/photo43.jpg" alt="Фото 43">
+                <img src="images/photo44.jpg" alt="Фото 44">
+                <img src="images/photo45.jpg" alt="Фото 45">
+                <img src="images/photo46.jpg" alt="Фото 46">
+                <img src="images/photo47.jpg" alt="Фото 47">
+                <img src="images/photo48.jpg" alt="Фото 48">
+                <img src="images/photo49.jpg" alt="Фото 49">
+                <img src="images/photo50.jpg" alt="Фото 50">
+                <img src="images/photo51.jpg" alt="Фото 51">
+                <img src="images/photo52.jpg" alt="Фото 52">
+                <img src="images/photo53.jpg" alt="Фото 53">
+                <img src="images/photo54.jpg" alt="Фото 54">
+                <img src="images/photo55.jpg" alt="Фото 55">
+                <img src="images/photo56.jpg" alt="Фото 56">
+                <img src="images/photo57.jpg" alt="Фото 57">
+                <img src="images/photo58.jpg" alt="Фото 58">
+                <img src="images/photo59.jpg" alt="Фото 59">
+                <img src="images/photo60.jpg" alt="Фото 60">
+                <img src="images/photo61.jpg" alt="Фото 61">
+                <img src="images/photo62.jpg" alt="Фото 62">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Свято-Успенський собор. Всі права захищено.</p>
+    </footer>
+</body>
 </html>
