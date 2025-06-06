@@ -5,6 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Свято-Успенський собор — Володимир</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1a4e8a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+        nav li {
+            margin: 0 15px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+        .hero {
+            position: relative;
+            text-align: center;
+        }
+        .hero img {
+            width: 100%;
+            height: auto;
+        }
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .info, .history, .gallery, .video-gallery {
+            padding: 40px;
+            background-color: #f9f9f9;
+        }
+        .history {
+            border: 3px solid #4a90e2;
+            background-color: #f5f5f5;
+            color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .history h3, .info h3, .gallery h3, .video-gallery h3 {
+            color: #1a4e8a;
+            text-align: center;
+        }
+        .gallery-grid, .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .gallery-grid img, .video-grid video {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            background-color: #1a4e8a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,8 +87,9 @@
         <nav>
             <ul>
                 <li><a href="#">Головна</a></li>
-                <li><a href="#">Історія</a></li>
-                <li><a href="#">Галерея</a></li>
+                <li><a href="#history">Історія</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#videos">Відео</a></li>
             </ul>
         </nav>
     </header>
@@ -27,17 +103,14 @@
         </section>
         <section class="info">
             <h3>Про собор</h3>
-            <b>Свято-Успенський кафедральний собор у місті Володимир — велична памʼятка християнської архітектури, що є частиною національної спадщини України. Його історія сягає часів Володимира Великого, а сучасна будівля поєднує в собі давні традиції та сучасне духовне життя.</b>
+            <b>Свято-Успенський кафедральний собор у місті Володимир — велична памʼятка християнської архітектури, що є частиною національної спадщини України.</b>
         </section>
-        <section class="history">
+        <section class="history" id="history">
             <h3>Історія</h3>
-            <p>Історія Свято-Успенського собору починається в далекому X столітті, коли князь Володимир Великий охрестив Русь. В той час у Володимирі-Волинському зʼявилася перша християнська святиня — дерев’яна церква, присвячена Успінню Пресвятої Богородиці.</p>
-            <p>У XI–XII століттях з ініціативи місцевих князів на місці дерев’яної церкви було зведено кам’яний храм, який став головною святинею Волині. Собор неодноразово знищувався ворожими набігами та пожежами, але кожного разу його відбудовували з ще більшою величчю. У період монголо-татарської навали святиня служила не лише духовним осередком, а й захисною спорудою для мешканців міста.</p>
-            <p>У XVI–XVIII століттях собор зазнавав перебудов у стилі ренесансу та бароко. Проте в XIX столітті, після включення Волині до складу Російської імперії, Успенський собор набуває рис візантійської архітектури. У радянський період храм було частково закрито, але віруючі зберегли його святість, проводячи служби навіть у підпіллі.</p>
-            <p>Після відновлення незалежності України собор відродився як духовний центр Волині. Нині він є осередком православної віри, памʼяткою національного значення та популярним місцем паломництва. Його стіни зберігають багатовікову історію боротьби, віри та відродження українського духу.</p>
+            <p>Історія Свято-Успенського собору починається в далекому X столітті, коли князь Володимир Великий охрестив Русь...</p>
             <img src="drevyanyi_sobor.jpg" alt="Дерев'яний собор до нашої ери">
         </section>
-        <section class="gallery">
+        <section class="gallery" id="gallery">
             <h3>Галерея</h3>
             <div class="gallery-grid">
                 <img src="images/photo1.jpg" alt="Фото 1">
@@ -89,19 +162,31 @@
                 <img src="images/photo47.jpg" alt="Фото 47">
                 <img src="images/photo48.jpg" alt="Фото 48">
                 <img src="images/photo49.jpg" alt="Фото 49">
-                <img src="images/photo50.jpg" alt="Фото 50">
-                <img src="images/photo51.jpg" alt="Фото 51">
-                <img src="images/photo52.jpg" alt="Фото 52">
-                <img src="images/photo53.jpg" alt="Фото 53">
-                <img src="images/photo54.jpg" alt="Фото 54">
-                <img src="images/photo55.jpg" alt="Фото 55">
-                <img src="images/photo56.jpg" alt="Фото 56">
-                <img src="images/photo57.jpg" alt="Фото 57">
-                <img src="images/photo58.jpg" alt="Фото 58">
-                <img src="images/photo59.jpg" alt="Фото 59">
-                <img src="images/photo60.jpg" alt="Фото 60">
-                <img src="images/photo61.jpg" alt="Фото 61">
-                <img src="images/photo62.jpg" alt="Фото 62">
+            </div>
+        </section>
+        <section class="video-gallery" id="videos">
+            <h3>Відео</h3>
+            <div class="video-grid">
+                <video src="videos/video1.mp4" controls></video>
+                <video src="videos/video2.mp4" controls></video>
+                <video src="videos/video3.mp4" controls></video>
+                <video src="videos/video4.mp4" controls></video>
+                <video src="videos/video5.mp4" controls></video>
+                <video src="videos/video6.mp4" controls></video>
+                <video src="videos/video7.mp4" controls></video>
+                <video src="videos/video8.mp4" controls></video>
+                <video src="videos/video9.mp4" controls></video>
+                <video src="videos/video10.mp4" controls></video>
+                <video src="videos/video11.mp4" controls></video>
+                <video src="videos/video12.mp4" controls></video>
+                <video src="videos/video13.mp4" controls></video>
+                <video src="videos/video14.mp4" controls></video>
+                <video src="videos/video15.mp4" controls></video>
+                <video src="videos/video16.mp4" controls></video>
+                <video src="videos/video17.mp4" controls></video>
+                <video src="videos/video18.mp4" controls></video>
+                <video src="videos/video19.mp4" controls></video>
+                <video src="videos/video20.mp4" controls></video>
             </div>
         </section>
     </main>
