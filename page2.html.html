@@ -1,38 +1,124 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <title>Петро-Павлівський монастир — Світязь</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <title>Ловля пива</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+    }
+    .game-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    canvas {
+      background: #87cefa;
+      border: 2px solid #000;
+    }
+    .image-column {
+      max-width: 400px;
+    }
+    .image-column img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 2px solid black;
+    }
+    h1, p {
+      margin: 10px 0;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Петро-Павлівський чоловічий монастир</h1>
-        <p>Духовна святиня на березі озера Світязь</p>
-    </header>
-
-    <section>
-        <h2>Історія монастиря</h2>
-        <p>Монастир був заснований у 2002 році біля храму святих апостолів Петра і Павла (1846 р.). Він є важливим духовним осередком Волині. Тут проходять богослужіння, духовні реколекції, табори для молоді.</p>
-        <img src="images/monastery.jpg" alt="Монастир у Світязі">
-    </section>
-
-    <section>
-        <h2>Фотогалерея</h2>
-        <img src="images/monastery.jpg" alt="Фото монастиря">
-        <!-- Можна додати більше фото пізніше -->
-    </section>
-
-    <section>
-        <h2>Відео</h2>
-        <video width="100%" controls>
-            <source src="videos/sample.mp4" type="video/mp4">
-            Ваш браузер не підтримує відео.
-        </video>
-    </section>
-
-    <footer>
-        <p>© 2025 Світязький монастир. Всі права захищено.</p>
-    </footer>
+  <div class="game-column">
+    <h1>Гра: Ловля пива</h1>
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+    <p>Очки: <span id="score">0</span></p>
+  </div>
+  <div class="image-column">
+    <img id="stageImage" src="img/0.png" alt="Стадія гри">
+  </div>
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreDisplay = document.getElementById('score');
+    const stageImage = document.getElementById('stageImage');
+    let score = 0;
+    let player = { x: 175, y: 550, width: 50, height: 20 };
+    let bottle = { x: Math.random() * 350, y: 0, width: 20, height: 40 };
+    function drawPlayer() {
+      ctx.fillStyle = 'brown';
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+    function drawBottle() {
+      ctx.fillStyle = 'gold';
+      ctx.fillRect(bottle.x, bottle.y, bottle.width, bottle.height);
+    }
+    function resetGame() {
+      alert("Ти пропустив пляшку! Гра починається заново.");
+      score = 0;
+      scoreDisplay.textContent = score;
+      player.x = 175;
+      bottle.x = Math.random() * 350;
+      bottle.y = 0;
+      stageImage.src = 'img/0.png';
+    }
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPlayer();
+      drawBottle();
+      bottle.y += 5;
+      if (bottle.y > canvas.height) {
+        resetGame();
+        return;
+      }
+      if (
+        bottle.y + bottle.height >= player.y &&
+        bottle.x + bottle.width >= player.x &&
+        bottle.x <= player.x + player.width
+      ) {
+        score += 100;
+        scoreDisplay.textContent = score;
+        bottle.y = 0;
+        bottle.x = Math.random() * 350;
+        updateImage();
+      }
+      requestAnimationFrame(update);
+    }
+    function updateImage() {
+      if (score >= 5000) {
+        stageImage.src = 'img/5.png';
+      } else if (score >= 4000) {
+        stageImage.src = 'img/4.png';
+      } else if (score >= 3000) {
+        stageImage.src = 'img/3.png';
+      } else if (score >= 2000) {
+        stageImage.src = 'img/2.png';
+      } else if (score >= 1000) {
+        stageImage.src = 'img/1.png';
+      } else {
+        stageImage.src = 'img/0.png';
+      }
+    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' && player.x > 0) {
+        player.x -= 20;
+      } else if (e.key === 'ArrowRight' && player.x + player.width < canvas.width) {
+        player.x += 20;
+      }
+    });
+    update();
+  </script>
 </body>
 </html>
