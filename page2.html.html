@@ -4,12 +4,9 @@
   <meta charset="UTF-8">
   <title>Ловля пива</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
-      margin: 0;
-      padding: 20px;
+      margin: 0; padding: 20px;
       font-family: Arial, sans-serif;
       background: #f0f0f0;
       display: flex;
@@ -17,27 +14,11 @@
       align-items: flex-start;
       gap: 30px;
     }
-    .game-column {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    canvas {
-      background: #87cefa;
-      border: 2px solid #000;
-    }
-    .image-column {
-      max-width: 400px;
-    }
-    .image-column img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border: 2px solid black;
-    }
-    h1, p {
-      margin: 10px 0;
-    }
+    .game-column { display: flex; flex-direction: column; align-items: center; }
+    canvas { background: #87cefa; border: 2px solid #000; }
+    .image-column { max-width: 400px; }
+    .image-column img { width: 100%; height: auto; border: 2px solid black; }
+    h1, p { margin: 10px 0; }
   </style>
 </head>
 <body>
@@ -55,8 +36,8 @@
     const scoreDisplay = document.getElementById('score');
     const stageImage = document.getElementById('stageImage');
     let score = 0;
-    let player = { x: 175, y: 550, width: 50, height: 20 };
-    let bottle = { x: Math.random() * 350, y: 0, width: 20, height: 40 };
+    const player = { x: 175, y: 550, width: 50, height: 20 };
+    const bottle = { x: Math.random() * 350, y: 0, width: 20, height: 40 };
     function drawPlayer() {
       ctx.fillStyle = 'brown';
       ctx.fillRect(player.x, player.y, player.width, player.height);
@@ -72,7 +53,7 @@
       player.x = 175;
       bottle.x = Math.random() * 350;
       bottle.y = 0;
-      stageImage.src = 'img/0.png';
+      updateImage();
     }
     function update() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -80,8 +61,7 @@
       drawBottle();
       bottle.y += 5;
       if (bottle.y > canvas.height) {
-        resetGame();
-        return;
+        resetGame(); return;
       }
       if (
         bottle.y + bottle.height >= player.y &&
@@ -97,26 +77,12 @@
       requestAnimationFrame(update);
     }
     function updateImage() {
-      if (score >= 5000) {
-        stageImage.src = 'img/5.png';
-      } else if (score >= 4000) {
-        stageImage.src = 'img/4.png';
-      } else if (score >= 3000) {
-        stageImage.src = 'img/3.png';
-      } else if (score >= 2000) {
-        stageImage.src = 'img/2.png';
-      } else if (score >= 1000) {
-        stageImage.src = 'img/1.png';
-      } else {
-        stageImage.src = 'img/0.png';
-      }
+      const stage = Math.min(Math.floor(score / 1000), 9);
+      stageImage.src = `img/${stage}.png`;
     }
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft' && player.x > 0) {
-        player.x -= 20;
-      } else if (e.key === 'ArrowRight' && player.x + player.width < canvas.width) {
-        player.x += 20;
-      }
+      if (e.key === 'ArrowLeft' && player.x > 0) player.x -= 20;
+      else if (e.key === 'ArrowRight' && player.x + player.width < canvas.width) player.x += 20;
     });
     update();
   </script>
