@@ -1,121 +1,153 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <title>Розрахунок заробітку</title>
+  <meta charset="UTF-8">
+  <title>Ловля пива</title>
   <style>
+    * { box-sizing: border-box; }
     body {
+      margin: 0; padding: 20px;
       font-family: Arial, sans-serif;
-      padding: 20px;
-      background: linear-gradient(to right, #e0f7fa, #ffe0f0);
-    }
-    .container {
+      background: #f0f0f0;
       display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      align-items: flex-start;
       justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
     }
-    .calculator, .image-container {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-    .calculator {
-      flex: 1;
-      min-width: 300px;
-      max-width: 400px;
-    }
-    .image-container {
-      flex: 1;
-      min-width: 300px;
-      text-align: center;
-    }
-    .image-container img {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    label, input, button, p {
-      margin-top: 10px;
-      display: block;
-    }
-    input {
-      padding: 8px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    button {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background-color: #28a745;
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #218838;
-    }
-    #result {
-      margin-top: 20px;
-    }
-    .error {
-      color: red;
-      margin-top: 10px;
-    }
+    .game-column { display: flex; flex-direction: column; align-items: center; }
+    canvas { background: #87cefa; border: 2px solid #000; }
+    .image-column { max-width: 400px; }
+    .image-column img { width: 100%; height: auto; border: 2px solid black; }
+    h1, p { margin: 10px 0; }
+    .info { margin-top: 10px; font-size: 18px; }
+    .controls { margin-top: 10px; }
+    button { padding: 10px 20px; margin: 5px; font-size: 16px; }
   </style>
 </head>
 <body>
-  <h2 style="text-align:center;">Розрахунок заробітку за збирання черешні</h2>
-
-  <div class="container">
-    <div class="calculator">
-      <label for="kg">Скільки кг зібрав:</label>
-      <input type="number" id="kg" min="0" step="0.1" placeholder="Введіть кількість кг" />
-      <button onclick="calculate()">Розрахувати</button>
-
-      <div id="error" class="error"></div>
-      <div id="result"></div>
-    </div>
-
-    <div class="image-container">
-      <!-- Замініть src на свій шлях до зображення -->
-      <img src="cherries.jpg" alt="Черешні" />
+  <div class="game-column">
+    <h1>Гра: Ловля пива</h1>
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+    <p>Очки: <span id="score">0</span></p>
+    <p>Рекорд: <span id="bestScore">0</span></p>
+    <p>Життя: <span id="lives">3</span></p>
+    <div class="controls">
+      <button onclick="moveLeft()">←</button>
+      <button onclick="moveRight()">→</button>
+      <button onclick="togglePause()">Пауза</button>
     </div>
   </div>
-
+  <div class="image-column">
+    <img id="stageImage" src="img/0.png" alt="Стадія гри">
+  </div>
   <script>
-    const pricePerKg = 2.5;
-    const exchangeRate = 10;
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreDisplay = document.getElementById('score');
+    const bestScoreDisplay = document.getElementById('bestScore');
+    const livesDisplay = document.getElementById('lives');
+    const stageImage = document.getElementById('stageImage');
 
-    function calculate() {
-      const kgInput = document.getElementById("kg");
-      const kg = parseFloat(kgInput.value);
-      const errorDiv = document.getElementById("error");
-      const resultDiv = document.getElementById("result");
+    let score = 0;
+    let bestScore = localStorage.getItem('bestScore') || 0;
+    let lives = 3;
+    let isPaused = false;
+    let bottleSpeed = 5;
 
-      errorDiv.textContent = "";
-      resultDiv.innerHTML = "";
+    bestScoreDisplay.textContent = bestScore;
 
-      if (isNaN(kg) || kg <= 0) {
-        errorDiv.textContent = "❗ Введіть коректну кількість кг (число більше нуля).";
-        return;
+    const player = { x: 175, y: 550, width: 50, height: 20 };
+    const bottle = { x: Math.random() * 350, y: 0, width: 20, height: 40 };
+
+    const catchSound = new Audio('catch.mp3');
+    const failSound = new Audio('fail.mp3');
+    const bgMusic = new Audio('bg.mp3');
+    bgMusic.loop = true;
+    bgMusic.volume = 0.2;
+    bgMusic.play();
+
+    function drawPlayer() {
+      ctx.fillStyle = 'brown';
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function drawBottle() {
+      ctx.fillStyle = 'gold';
+      ctx.fillRect(bottle.x, bottle.y, bottle.width, bottle.height);
+    }
+
+    function resetGame() {
+      failSound.play();
+      lives--;
+      if (lives <= 0) {
+        alert("Гру завершено! Починаємо спочатку.");
+        if (score > bestScore) {
+          bestScore = score;
+          localStorage.setItem('bestScore', bestScore);
+        }
+        score = 0;
+        lives = 3;
+      }
+      bottle.x = Math.random() * 350;
+      bottle.y = 0;
+      scoreDisplay.textContent = score;
+      bestScoreDisplay.textContent = bestScore;
+      livesDisplay.textContent = lives;
+      updateImage();
+    }
+
+    function update() {
+      if (isPaused) return requestAnimationFrame(update);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawPlayer();
+      drawBottle();
+
+      bottle.y += bottleSpeed;
+      bottleSpeed = Math.min(7, 3 + score / 2000);
+
+      if (bottle.y > canvas.height) {
+        resetGame();
+      } else if (
+        bottle.y + bottle.height >= player.y &&
+        bottle.x + bottle.width >= player.x &&
+        bottle.x <= player.x + player.width
+      ) {
+        catchSound.play();
+        score += 100;
+        scoreDisplay.textContent = score;
+        bottle.y = 0;
+        bottle.x = Math.random() * 350;
+        updateImage();
       }
 
-      const totalPLN = kg * pricePerKg;
-      const totalUAH = totalPLN * exchangeRate;
-
-      resultDiv.innerHTML = `
-        <p><strong>Кількість кг:</strong> ${kg.toFixed(2)} кг</p>
-        <p><strong>Ціна за 1 кг:</strong> ${pricePerKg.toFixed(2)} злотих</p>
-        <p><strong>Сума в злотих:</strong> ${totalPLN.toFixed(2)} zł</p>
-        <p><strong>Курс PLN → UAH:</strong> ${exchangeRate.toFixed(2)}</p>
-        <p><strong>Сума в гривнях:</strong> ${totalUAH.toFixed(2)} грн</p>
-      `;
+      requestAnimationFrame(update);
     }
+
+    function updateImage() {
+      const stage = Math.min(Math.floor(score / 1000), 9);
+      stageImage.src = `img/${stage}.png`;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') moveLeft();
+      else if (e.key === 'ArrowRight') moveRight();
+      else if (e.key.toLowerCase() === 'p') togglePause();
+    });
+
+    function moveLeft() {
+      if (player.x > 0) player.x -= 20;
+    }
+
+    function moveRight() {
+      if (player.x + player.width < canvas.width) player.x += 20;
+    }
+
+    function togglePause() {
+      isPaused = !isPaused;
+      if (!isPaused) update();
+    }
+
+    update();
   </script>
 </body>
 </html>
